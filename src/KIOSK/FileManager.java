@@ -145,13 +145,13 @@ public class FileManager {
 	// 파일 저장하기 (좌석)
 	public void saveSeatData() {
 		String info = "";
-		for (int i = 0; i < seatManager.size() ; i++) {
+		for (int i = 0; i < seatManager.size(); i++) {
 			info += seatManager.get(i).getSeatNum();
 			info += "/";
 			info += seatManager.get(i).getPrice();
 			info += "/";
 			info += seatManager.get(i).isSeatUse();
-			if (i != seatManager.size()- 1) {
+			if (i != seatManager.size() - 1) {
 				info += "\n";
 			}
 		}
@@ -176,18 +176,28 @@ public class FileManager {
 	// 파일 불러오기 (좌석)
 	void loadSeatData() {
 		file = new File(SEAT_PATH);
-		String seatData = "";
-		if (!file.exists())
+		isLoad = false;
+		data = "";
+		if (!file.exists()) {
+			for (int i = 0; i < 28; i++) {
+				SeatInfo temp = new SeatInfo();
+				temp.setSeatNum(i + 1);
+				temp.setPrice(8000);
+				temp.setSeatUse(false);
+				seatManager.add(temp);
+			}
+			saveSeatData();
 			return;
+		}
 		try {
 			reader = new FileReader(file);
 			br = new BufferedReader(reader);
 			while (true) {
-				String line = br.readLine();
-				if (line == null)
+				String seatText = br.readLine();
+				if (seatText == null)
 					break;
-				data += line + "\n";
-				loadSeat(seatData);
+				data += seatText + "\n";
+				loadSeat(seatText);
 				isLoad = true;
 			}
 			reader.close();
@@ -195,6 +205,7 @@ public class FileManager {
 			if (isLoad) {
 				System.out.println("== load == \n" + data);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

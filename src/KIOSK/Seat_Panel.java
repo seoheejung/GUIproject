@@ -54,25 +54,22 @@ public class Seat_Panel extends JPanel implements ActionListener {
 				seat_btn[i][n] = new JButton();
 				seat_btn[i][n].setText(num + "");
 				seat_btn[i][n].setFont(font);
-				seat_btn[i][n].setBackground(Color.gray);
-				if (FileManager.instance.seatManager.get(num).isSeatUse()) {
+				seat_btn[i][n].setBackground(Color.lightGray);
+				if (FileManager.instance.seatManager.get(num - 1).isSeatUse()) {
 					seat_btn[i][n].setBackground(Color.black);
 				}
 				seat_btn[i][n].setForeground(Color.WHITE);
-				
-				if( i < 2) {
+
+				if (i < 2) {
 					seat_btn[i][n].setBounds(190 + (i * 90), 390 + (n * 58), 44, 44);
-				}else if(i >= 2) {
+				} else if (i >= 2) {
 					seat_btn[i][n].setBounds(165 + (i * 90), 390 + (n * 58), 44, 44);
 				}
-				
+				seat_btn[i][n].addActionListener(this);
 				add(seat_btn[i][n]);
 				num += 1;
 			}
 		}
-		
-
-		
 	}
 
 	void info(String name, String mobile) {
@@ -111,18 +108,20 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
-		}
-		for (int i = 0; i < seat_btn.length; i++) {
-			for (int n = 0; n < seat_btn[i].length; n++) {
-				if (e.getSource() == seat_btn[i][n]) {
-					int temp = Integer.parseInt(seat_btn[i][n].getText());
-					if(FileManager.instance.seatManager.get(temp).isSeatUse()) {
-						JOptionPane.showMessageDialog(null, "사용중인 좌석입니다.", "", JOptionPane.WARNING_MESSAGE);
-					}else {
-						JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
+		} else {
+			for (int i = 0; i < seat_btn.length; i++) {
+				for (int n = 0; n < seat_btn[i].length; n++) {
+					if (e.getSource() == seat_btn[i][n]) {
+						int temp = Integer.parseInt(seat_btn[i][n].getText());
+						if (FileManager.instance.seatManager.get(temp - 1).isSeatUse()) {
+							JOptionPane.showMessageDialog(null, "사용중인 좌석입니다.", "", JOptionPane.WARNING_MESSAGE);
+						} else {
+						
+						}
 					}
 				}
 			}
