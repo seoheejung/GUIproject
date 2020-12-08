@@ -26,7 +26,10 @@ public class Login_Panel extends JPanel implements ActionListener {
 
 	JTextField mobile_tf; // 핸드폰번호 입력창
 	JTextField pw_tf; // 패스워드 입력창
-
+	
+	String mobile = "010";
+	String pw = "";
+	
 	Font font;
 
 	Image img = new ImageIcon("./src/Image/main.jpg").getImage();
@@ -36,34 +39,33 @@ public class Login_Panel extends JPanel implements ActionListener {
 
 		buttonSet();
 		textFieldSet();
-		JLabel login = new JLabel();
-		login.setBackground(new Color(238, 237, 238));
-		login.setOpaque(true);
-		login.setBounds(90, 240, 360, 300);
-		add(login);
+		JLabel bg_LB = new JLabel();
+		bg_LB.setBackground(new Color(255,252,248));
+		bg_LB.setOpaque(true);
+		bg_LB.setBounds(90, 240, 360, 300);
+		add(bg_LB);
 
 		dialButtonSet();
 	}
 
 	void buttonSet() {
-		font = new Font("Gothic", Font.BOLD, 20);
+		font = new Font("나눔고딕", Font.BOLD, 20);
 
 		login_btn = new JButton("로그인");
 		login_btn.setBackground(Color.WHITE);
 		login_btn.setForeground(Color.GRAY);
 		login_btn.setFont(font);
-		login_btn.setOpaque(true);
-		login_btn.setBounds(135, 400, 270, 40);
+		login_btn.setBounds(135, 400, 270, 50);
 		login_btn.addActionListener(this);
 		add(login_btn);
 
-		font = new Font("Gothic", Font.BOLD, 16);
+		font = new Font("나눔고딕", Font.BOLD, 16);
 
 		join_btn = new JButton("회원가입");
-		join_btn.setBackground(new Color(76, 51, 40));
+		join_btn.setBackground(new Color(76,51,40));
 		join_btn.setForeground(Color.WHITE);
 		join_btn.setFont(font);
-		join_btn.setBounds(135, 490, 120, 30);
+		join_btn.setBounds(135, 480, 120, 40);
 		join_btn.addActionListener(this);
 		add(join_btn);
 
@@ -71,13 +73,13 @@ public class Login_Panel extends JPanel implements ActionListener {
 		exit_btn.setBackground(new Color(76, 51, 40));
 		exit_btn.setForeground(Color.WHITE);
 		exit_btn.setFont(font);
-		exit_btn.setBounds(285, 490, 120, 30);
+		exit_btn.setBounds(285, 480, 120, 40);
 		exit_btn.addActionListener(this);
 		add(exit_btn);
 	}
 
 	void dialButtonSet() {
-		font = new Font("Gothic", Font.PLAIN, 18);
+		font = new Font("나눔고딕", Font.PLAIN, 18);
 		dial_btn = new JButton[4][3];
 		int num = 1;
 		for (int i = 0; i < dial_btn.length; i++) {
@@ -101,26 +103,52 @@ public class Login_Panel extends JPanel implements ActionListener {
 				add(dial_btn[i][n]);
 			}
 		}
-
+	}
+	
+	void dialButtonPress(ActionEvent e) {
+		for (int i = 0; i < dial_btn.length; i++) {
+			for (int n = 0; n < dial_btn[i].length; n++) {
+				if(e.getSource() == dial_btn[i][n]) {
+					if(mobile_tf.getText().length() < 11) {
+						mobile += dial_btn[i][n].getText();
+						mobile_tf.setText(mobile);
+						repaint();
+					} else if(mobile_tf.getText().length() > 10) {
+						pw += dial_btn[i][n].getText();
+						pw_tf.setText(pw);
+						repaint();
+					}
+				}
+			}
+		}
 	}
 
 	void textFieldSet() {
-		font = new Font("Gothic", Font.PLAIN, 16);
+		font = new Font("나눔고딕", Font.PLAIN, 16);
 
 		mobile_tf = new JTextField(15);
-		mobile_tf.setText("핸드폰번호 입력");
+		mobile_tf.setText("010");
 		mobile_tf.setBounds(135, 270, 270, 40);
-		mobile_tf.setBackground(Color.GRAY);
+		mobile_tf.setBackground(new Color(149,145,135));
 		mobile_tf.setForeground(Color.WHITE);
 		mobile_tf.setFont(font);
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
 		mobile_tf.addActionListener(this);
 		add(mobile_tf);
 
-		mobile_tf.addMouseListener(new MouseListener() {
+		pw_tf = new JTextField(5);
+		pw_tf.setText("비밀번호 입력");
+		pw_tf.setBounds(135, 330, 270, 40);
+		pw_tf.setBackground(new Color(149,145,135));
+		pw_tf.setForeground(Color.WHITE);
+		pw_tf.setFont(font);
+		pw_tf.setHorizontalAlignment(JTextField.CENTER);
+		pw_tf.addActionListener(this);
+		add(pw_tf);
+		
+		pw_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				mobile_tf.setText("");
 				pw_tf.setText("");
 				repaint();
 			}
@@ -142,49 +170,45 @@ public class Login_Panel extends JPanel implements ActionListener {
 			}
 		});
 
-		pw_tf = new JTextField(5);
-		pw_tf.setText("비밀번호 입력");
-		pw_tf.setBounds(135, 330, 270, 40);
-		pw_tf.setBackground(Color.GRAY);
-		pw_tf.setForeground(Color.WHITE);
-		pw_tf.setFont(font);
-		pw_tf.setHorizontalAlignment(JTextField.CENTER);
-		pw_tf.addActionListener(this);
-		add(pw_tf);
-
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, null);
+		g.drawImage(img, 0, 0, 540,960,null);
 		setOpaque(false);
 		super.paintComponent(g);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		dialButtonPress(e);
 
 		// 로그인 버튼을 눌렀을 때
 		if (e.getSource() == login_btn) {
-			if (mobile_tf.getText().equals("") || pw_tf.getText().equals("")) {
-				JOptionPane.showMessageDialog(null, "모든 필드를 입력하세요.", "빈 필드 존재", JOptionPane.WARNING_MESSAGE);
-			}
 			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
-			System.out.println(log);
 			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인하세요", "로그인 실패", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
 			} else {
-				// MainSystem.frame.setContentPane(new Game_Panel());
+				MainSystem.frame.setContentPane(new Seat_Panel(log, mobile_tf.getText()));
 				MainSystem.frame.revalidate();
 			}
 			// 회원가입 버튼을 눌렀을 때
 		} else if (e.getSource() == join_btn) {
-			// MainSystem.frame.setContentPane(new Join_Panel());
+			MainSystem.frame.setContentPane(new Join_Panel());
 			MainSystem.frame.revalidate();
-			// ID/PW 찾기 버튼을 눌렀을 때
+			// 퇴실하기 버튼을 눌렀을 때
 		} else if (e.getSource() == exit_btn) {
-			// MainSystem.frame.setContentPane(new Find_Panel());
-			MainSystem.frame.revalidate();
+			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
+			if (log.equals("")) {
+				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
+			} else {
+				if(FileManager.instance.exit(log)) {
+					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "", JOptionPane.WARNING_MESSAGE);
+					MainSystem.frame.setContentPane(new Login_Panel());
+					MainSystem.frame.revalidate();
+				}
+			}
+			
 		}
 
 	}

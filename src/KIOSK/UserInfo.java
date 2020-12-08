@@ -5,31 +5,62 @@ public class UserInfo {
 	private String name;
 	private String mobile;
 	private String pw;
-	private int seat;
-	
+	private int seatNum; // 자리 번호
+	private long maxTime; // 사용 가능한 총 시간
+	private long preTime; // 사용 시작한 시간
+	boolean seatUse = false; // 자리를 사용하는지 여부
+
+	void use() {
+		seatUse = true;
+		preTime = System.currentTimeMillis();
+	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getMobile() {
 		return mobile;
 	}
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
 	public String getPw() {
 		return pw;
 	}
+
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public int getSeat() {
-		return seat;
+
+	public int getSeatNum() {
+		return seatNum;
 	}
-	public void setSeat(int seat) {
-		this.seat = seat;
+
+	public void setSeatNum(int seatNum) {
+		this.seatNum = seatNum;
+	}
+
+	public long getMaxTime() {
+		return maxTime;
+	}
+
+	public void setMaxTime(long maxTime) {
+		this.maxTime = maxTime;
+	}
+
+	public long getPreTime() {
+		return preTime;
+	}
+
+	public void setPreTime(long preTime) {
+		this.preTime = preTime;
 	}
 
 }
