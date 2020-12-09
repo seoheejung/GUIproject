@@ -29,9 +29,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	JCheckBox check = new JCheckBox("개인정보취급방침동의"); // 개인정보취급방침동의 체크박스
 	boolean isChecked = false;
-	
+
 	Font font;
-	
+
 	Image img = new ImageIcon("./src/Image/bg.jpg").getImage();
 
 	JButton join_btn; // 회원가입 버튼
@@ -47,17 +47,17 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		join_LB.setForeground(Color.WHITE);
 		join_LB.setBounds(180, 50, 270, 50);
 		add(join_LB);
-		
+
 		textFieldSet();
 		buttonSet();
-		
+
 		JLabel bg_LB = new JLabel();
 		bg_LB.setBackground(ColorInfo.instance.label_color);
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(90, 120, 360, 400);
 		add(bg_LB);
 	}
-	
+
 	void buttonSet() {
 		font = new Font("나눔바른고딕", Font.BOLD, 16);
 
@@ -77,10 +77,10 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		back_btn.addActionListener(this);
 		add(back_btn);
 	}
-	
+
 	void textFieldSet() {
 		font = new Font("나눔바른고딕", Font.PLAIN, 16);
-		
+
 		name_tf = new JTextField(15);
 		name_tf.setText("이름");
 		name_tf.setBounds(135, 150, 270, 40);
@@ -90,13 +90,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		name_tf.setHorizontalAlignment(JTextField.CENTER);
 		name_tf.addActionListener(this);
 		add(name_tf);
-		
+
 		name_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				name_tf.setText("");
 				repaint();
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
@@ -123,13 +124,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
 		mobile_tf.addActionListener(this);
 		add(mobile_tf);
-		
+
 		mobile_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				mobile_tf.setText("");
 				repaint();
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
@@ -156,13 +158,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);
 		add(pw_tf);
-		
+
 		pw_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				pw_tf.setText("");
 				repaint();
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
@@ -179,7 +182,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
+
 		confirm_pw_tf = new JTextField(5);
 		confirm_pw_tf.setText("비밀번호확인");
 		confirm_pw_tf.setBounds(135, 330, 270, 40);
@@ -189,13 +192,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		confirm_pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		confirm_pw_tf.addActionListener(this);
 		add(confirm_pw_tf);
-		
+
 		confirm_pw_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				confirm_pw_tf.setText("");
 				repaint();
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
@@ -212,18 +216,17 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
+
 		check.setBounds(135, 390, 200, 30);
 		check.setFont(font);
 		check.setBackground(ColorInfo.instance.label_color);
 		check.addItemListener(this);
 		add(check);
 	}
-	
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, 540,960,null);
+		g.drawImage(img, 0, 0, 540, 960, null);
 		setOpaque(false);
 		super.paintComponent(g);
 	}
@@ -234,19 +237,29 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
+
 		} else if (e.getSource() == join_btn) {
 			// 회원가입 버튼 눌렀을 때
 			if (name_tf.getText().equals("") || mobile_tf.getText().equals("") || pw_tf.getText().equals("")
 					|| confirm_pw_tf.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "모든 필드를 입력하세요.", "", JOptionPane.WARNING_MESSAGE);
 				return;
-			} else if(!(pw_tf.getText().equals(confirm_pw_tf.getText()))) {
+			} else if (!(pw_tf.getText().equals(confirm_pw_tf.getText()))) {
 				JOptionPane.showMessageDialog(null, "비밀번호가 맞지 않습니다.", "", JOptionPane.WARNING_MESSAGE);
 				return;
-			} else if(!isChecked) {
+			} else if (!isChecked) {
 				JOptionPane.showMessageDialog(null, "개인정보취급방침동의를 체크해주세요.", "", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
+
+			for (int i = 0; i < FileManager.instance.userManager.size(); i++) {
+				if (mobile_tf.getText().equals(FileManager.instance.userManager.get(i).getMobile())) {
+					JOptionPane.showMessageDialog(null, "동일한 번호가 있습니다.", "Message", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+			}
+
 			UserInfo user = new UserInfo();
 			user.setName(name_tf.getText());
 			user.setMobile(mobile_tf.getText());
@@ -254,13 +267,13 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			user.setSeatNum(0);
 			user.setMaxTime(0);
 			user.setPreTime(0);
-			
 
 			FileManager.instance.addUser(user);
-			JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "회원가입", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "Message", JOptionPane.WARNING_MESSAGE);
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		}
+
 	}
 
 	@Override

@@ -10,11 +10,6 @@ public class UserInfo {
 	private long preTime; // 사용 시작한 시간
 	boolean seatUse = false; // 자리를 사용하는지 여부
 
-	void use() {
-		seatUse = true;
-		preTime = System.currentTimeMillis();
-	}
-
 	public String getName() {
 		return name;
 	}

@@ -39,7 +39,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		seat_LB.setBounds(50, 200, 240, 50);
 		add(seat_LB);
 
-		button();
+		seatButtonSet();
 	}
 	
 	String seatUseState() {
@@ -55,7 +55,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		return state;
 	}
 
-	void button() {
+	void seatButtonSet() {
 		seat_btn = new JButton[4][7];
 		int num = 1;
 		font = new Font("나눔바른고딕", Font.BOLD, 9);
@@ -100,7 +100,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 		font = new Font("나눔바른고딕", Font.BOLD, 22);
 		update_btn = new JButton("정보수정");
-		update_btn.setBackground(Color.WHITE);
+		update_btn.setBackground(ColorInfo.instance.label_color);
 		update_btn.setForeground(Color.black);
 		update_btn.setFont(font);
 		update_btn.setBounds(240, 70, 120, 60);
@@ -108,7 +108,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		add(update_btn);
 
 		back_btn = new JButton("뒤로가기");
-		back_btn.setBackground(Color.WHITE);
+		back_btn.setBackground(ColorInfo.instance.label_color);
 		back_btn.setForeground(Color.black);
 		back_btn.setFont(font);
 		back_btn.setBounds(380, 70, 120, 60);
@@ -128,9 +128,9 @@ public class Seat_Panel extends JPanel implements ActionListener {
 					if (e.getSource() == seat_btn[i][n]) {
 						int temp = Integer.parseInt(seat_btn[i][n].getText());
 						if (FileManager.instance.seatManager.get(temp - 1).isSeatUse()) {
-							JOptionPane.showMessageDialog(null, "사용 중인 좌석입니다.", "좌석 선택", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "사용 중인 좌석입니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 						} else {
-							MainSystem.frame.setContentPane(new Purchase_Panel(name, moblie, temp-1));
+							MainSystem.frame.setContentPane(new Select_Panel(name, moblie, temp-1));
 							MainSystem.frame.revalidate();
 						}
 					}

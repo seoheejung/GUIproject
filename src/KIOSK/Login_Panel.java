@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Login_Panel extends JPanel implements ActionListener {
-	JButton exit_btn; // 퇴실하기 버튼
+	JButton checkOut_btn; // 퇴실하기 버튼
 	JButton login_btn; // 로그인 버튼
 	JButton join_btn; // 회원가입 버튼
 
@@ -69,13 +69,13 @@ public class Login_Panel extends JPanel implements ActionListener {
 		join_btn.addActionListener(this);
 		add(join_btn);
 
-		exit_btn = new JButton("퇴실하기");
-		exit_btn.setBackground(ColorInfo.instance.button_color);
-		exit_btn.setForeground(Color.WHITE);
-		exit_btn.setFont(font);
-		exit_btn.setBounds(285, 480, 120, 40);
-		exit_btn.addActionListener(this);
-		add(exit_btn);
+		checkOut_btn = new JButton("퇴실하기");
+		checkOut_btn.setBackground(ColorInfo.instance.button_color);
+		checkOut_btn.setForeground(Color.WHITE);
+		checkOut_btn.setFont(font);
+		checkOut_btn.setBounds(285, 480, 120, 40);
+		checkOut_btn.addActionListener(this);
+		add(checkOut_btn);
 	}
 
 	void dialButtonSet() {
@@ -183,7 +183,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		if (e.getSource() == login_btn) {
 			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
 			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "Message", JOptionPane.WARNING_MESSAGE);
 			} else {
 				MainSystem.frame.setContentPane(new Seat_Panel(log, mobile_tf.getText()));
 				MainSystem.frame.revalidate();
@@ -193,16 +193,16 @@ public class Login_Panel extends JPanel implements ActionListener {
 			MainSystem.frame.setContentPane(new Join_Panel());
 			MainSystem.frame.revalidate();
 			// 퇴실하기 버튼을 눌렀을 때
-		} else if (e.getSource() == exit_btn) {
+		} else if (e.getSource() == checkOut_btn) {
 			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
 			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "Message", JOptionPane.WARNING_MESSAGE);
 			} else {
-				if (FileManager.instance.exit(log)) {
-					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "", JOptionPane.WARNING_MESSAGE);
+				if (FileManager.instance.checkOut(mobile_tf.getText())) {
+					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 					MainSystem.frame.setContentPane(new Login_Panel());
 					MainSystem.frame.revalidate();
-				}
+				} 
 			}
 
 		}

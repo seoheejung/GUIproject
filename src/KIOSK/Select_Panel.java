@@ -6,34 +6,36 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
-public class Purchase_Panel extends JPanel implements ActionListener {
+public class Select_Panel extends JPanel implements ActionListener {
 
 	Font font;
 	String name;
 	String mobile;
 	int seatNum;
-	String useTime;
+	String useTime = "";
+	int price = 0;
 
 	Image img = new ImageIcon("./src/Image/purchase.jpg").getImage();
 
 	JButton login_btn; // 처음으로 버튼
 	JButton seat_btn; // 좌석화면 버튼
+	JButton next_btn; // 다음 버튼
 
 	JLabel goods_LB;
 	JLabel hour_LB;
-	JLabel receipt_LB;
+
+	JLabel summary_LB;
+	JLabel seatNum_LB;
+	JLabel useTime_LB;
+	JLabel totalPrice_LB;
 
 	JRadioButton fixedTicket_rd; // 정액권 라디오버튼
 	JRadioButton hourTicket_rd; // 시간권 라디오버튼
@@ -42,7 +44,7 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 	JRadioButton[] fixed_rd; // 정액권 종류 라디오 버튼
 	JRadioButton[] hour_rd; // 시간권 종류 라디오 버튼
 
-	public Purchase_Panel(String name, String mobile, int seatNum) {
+	public Select_Panel(String name, String mobile, int seatNum) {
 		this.name = name;
 		this.mobile = mobile;
 		this.seatNum = seatNum;
@@ -69,19 +71,21 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 		hour_LB.setVisible(false);
 		add(hour_LB);
 
-		receipt_LB = new JLabel(" [3] 내역 확인");
-		receipt_LB.setFont(font);
-		receipt_LB.setForeground(Color.WHITE);
-		receipt_LB.setOpaque(true);
-		receipt_LB.setBackground(ColorInfo.instance.dial_button_color);
-		receipt_LB.setBounds(50, 680, 170, 50);
-		// receipt_LB.setVisible(false);
-		add(receipt_LB);
+		summary_LB = new JLabel(" [3] 내역 확인");
+		summary_LB.setFont(font);
+		summary_LB.setForeground(Color.WHITE);
+		summary_LB.setOpaque(true);
+		summary_LB.setBackground(ColorInfo.instance.dial_button_color);
+		summary_LB.setBounds(50, 680, 170, 50);
+		summary_LB.setVisible(false);
+		add(summary_LB);
 
 		goods_radioButtonSet();
 		hour_radioButtonSet();
 		fixed_radioButtonSet();
-		receipt();
+		summaryInfo(useTime);
+		summary_invisible();
+
 	}
 
 	void goods_radioButtonSet() {
@@ -142,58 +146,88 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 		}
 	}
 
-	void visible(JRadioButton[] rd) {
+	void radio_visible(JRadioButton[] rd) {
 		for (int i = 0; i < rd.length; i++) {
 			rd[i].setVisible(true);
 		}
 	}
 
-	void invisible(JRadioButton[] rd) {
+	void radio_invisible(JRadioButton[] rd) {
 		for (int i = 0; i < rd.length; i++) {
 			rd[i].setVisible(false);
 		}
 	}
-	
-	int hour_return (String text) {
-		int hour = 0;
+
+	int priceReturn(String text) {
+		price = 0;
 		String temp = "";
-		for (int i = 0; i < text.length(); i++) {
-			if(text.charAt(i) == '시') {
-				break;
+		if (!text.equals("")) {
+			for (int i = 0; i < text.length(); i++) {
+				if (text.charAt(i) == '시') {
+					break;
+				}
+				temp += text.charAt(i);
 			}
-			temp += text.charAt(i);
+			temp = temp.substring(1, temp.length());
+			if (hourTicket_rd.isSelected()) {
+				price = Integer.parseInt(temp) * 1000 + 1000;
+			} else if (fixedTicket_rd.isSelected()) {
+				price = Integer.parseInt(temp) * 1000 + 10000;
+			}
+				
 		}
-		hour = Integer.parseInt(temp);
-		
-		return hour;
+		return price;
 	}
 
-	void receipt() {
-		font = new Font("나눔바른고딕", Font.PLAIN, 22);
-		JLabel seatNum_LB = new JLabel("· 이용좌석          " + seatNum + "번");
+	void summaryInfo(String useTime) {
+
+		summary_LB.setVisible(true);
+
+		font = new Font("나눔바른고딕", Font.PLAIN, 20);
+		seatNum_LB = new JLabel("· 이용좌석          " + seatNum + "번");
 		seatNum_LB.setFont(font);
 		seatNum_LB.setForeground(Color.BLACK);
 		seatNum_LB.setBackground(ColorInfo.instance.label_color);
 		seatNum_LB.setOpaque(true);
-		seatNum_LB.setBounds(80, 740, 240, 40);
+		seatNum_LB.setVisible(true);
+		seatNum_LB.setBounds(70, 740, 240, 40);
 		add(seatNum_LB);
-		
-		JLabel useTime_LB = new JLabel("· 이용시간          " + useTime);
+
+		useTime_LB = new JLabel("· 이용시간         " + useTime);
 		useTime_LB.setFont(font);
 		useTime_LB.setForeground(Color.BLACK);
 		useTime_LB.setBackground(ColorInfo.instance.label_color);
 		useTime_LB.setOpaque(true);
-		useTime_LB.setBounds(80, 780, 240, 40);
+		useTime_LB.setVisible(true);
+		useTime_LB.setBounds(70, 780, 240, 40);
 		add(useTime_LB);
-		
-		JLabel totalPrice_LB = new JLabel("· 결제금액          " + seatNum + "번");
+
+		totalPrice_LB = new JLabel("· 결제금액          " + priceReturn(useTime) + "원");
 		totalPrice_LB.setFont(font);
 		totalPrice_LB.setForeground(Color.BLACK);
 		totalPrice_LB.setBackground(ColorInfo.instance.label_color);
 		totalPrice_LB.setOpaque(true);
-		totalPrice_LB.setBounds(80, 780, 240, 40);
+		totalPrice_LB.setVisible(true);
+		totalPrice_LB.setBounds(70, 820, 240, 40);
 		add(totalPrice_LB);
 
+		font = new Font("나눔바른고딕", Font.PLAIN, 24);
+		next_btn = new JButton("다음");
+		next_btn.setForeground(Color.gray);
+		next_btn.setBackground(ColorInfo.instance.label_color);
+		next_btn.setFont(font);
+		next_btn.setBounds(340, 790, 120, 60);
+		next_btn.setVisible(true);
+		next_btn.addActionListener(this);
+		add(next_btn);
+	}
+
+	void summary_invisible() {
+		summary_LB.setVisible(false);
+		seatNum_LB.setVisible(false);
+		useTime_LB.setVisible(false);
+		totalPrice_LB.setVisible(false);
+		next_btn.setVisible(false);
 	}
 
 	void info(String name, String mobile) {
@@ -214,7 +248,7 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 
 		font = new Font("나눔바른고딕", Font.BOLD, 22);
 		seat_btn = new JButton("좌석화면");
-		seat_btn.setBackground(Color.WHITE);
+		seat_btn.setBackground(ColorInfo.instance.label_color);
 		seat_btn.setForeground(Color.black);
 		seat_btn.setFont(font);
 		seat_btn.setBounds(240, 70, 120, 60);
@@ -222,7 +256,7 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 		add(seat_btn);
 
 		login_btn = new JButton("처음으로");
-		login_btn.setBackground(Color.WHITE);
+		login_btn.setBackground(ColorInfo.instance.label_color);
 		login_btn.setForeground(Color.black);
 		login_btn.setFont(font);
 		login_btn.setBounds(380, 70, 120, 60);
@@ -239,31 +273,40 @@ public class Purchase_Panel extends JPanel implements ActionListener {
 		} else if (e.getSource() == seat_btn) {
 			MainSystem.frame.setContentPane(new Seat_Panel(name, mobile));
 			MainSystem.frame.revalidate();
+
+		} else if (e.getSource() == next_btn) {
+			MainSystem.frame.setContentPane(new Payment_panel(name, mobile, seatNum, useTime, price));
+			MainSystem.frame.revalidate();
+
 		} else if (e.getSource() == hourTicket_rd) {
 			hour_LB.setVisible(true);
-			visible(hour_rd);
-			invisible(fixed_rd);
+			radio_visible(hour_rd);
+			radio_invisible(fixed_rd);
 			repaint();
 		} else if (e.getSource() == fixedTicket_rd) {
 			hour_LB.setVisible(true);
-			visible(fixed_rd);
-			invisible(hour_rd);
+			radio_visible(fixed_rd);
+			radio_invisible(hour_rd);
 			repaint();
-		} else if (hourTicket_rd.isSelected()){
+
+		} else if (hourTicket_rd.isSelected()) {
 			for (int i = 0; i < hour_rd.length; i++) {
-				if(e.getSource() == hour_rd[i]) {
+				if (e.getSource() == hour_rd[i]) {
+					summary_invisible();
 					useTime = hour_rd[i].getText();
+					summaryInfo(useTime);
+					repaint();
 				}
 			}
-			repaint();
-			
-		} else if (fixedTicket_rd.isSelected()){
+		} else if (fixedTicket_rd.isSelected()) {
 			for (int i = 0; i < fixed_rd.length; i++) {
-				if(e.getSource() == fixed_rd[i]) {
+				if (e.getSource() == fixed_rd[i]) {
+					summary_invisible();
 					useTime = fixed_rd[i].getText();
+					summaryInfo(useTime);
+					repaint();
 				}
 			}
-			repaint();
 		}
 	}
 
