@@ -45,6 +45,39 @@ public class FileManager {
 		addData(user);
 		saveUserData();
 	}
+	
+	// 로그인
+		String login(String mobile, String pw) {
+			String check_id = "";
+			for (int i = 0; i < userManager.size(); i++) {
+				if (mobile.equals(userManager.get(i).getMobile()) && pw.equals(userManager.get(i).getPw())) {
+					check_id = userManager.get(i).getName();
+					LOG = i;
+					break;
+				}
+			}
+			return check_id;
+		}
+
+		// 퇴실하기
+		boolean exit(String mobile) {
+			for (int i = 0; i < userManager.size(); i++) {
+				if (mobile.equals(userManager.get(i).getMobile())) {
+					if (!userManager.get(i).seatUse) {
+						JOptionPane.showMessageDialog(null, "이용중인 좌석이 없습니다.", "", JOptionPane.WARNING_MESSAGE);
+						break;
+					}
+					userManager.get(i).setSeatNum(0);
+					userManager.get(i).seatUse = false;
+					if (userManager.get(i).getMaxTime() > 0) {
+						long time = System.currentTimeMillis() - userManager.get(i).getPreTime();
+						userManager.get(i).setMaxTime(time / 360000);
+					}
+					return true;
+				}
+			}
+			return false;
+		}
 
 	private void addData(UserInfo user) {
 		// 추가된 회원 정보 저장
@@ -107,39 +140,6 @@ public class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	// 로그인
-	String login(String mobile, String pw) {
-		String check_id = "";
-		for (int i = 0; i < userManager.size(); i++) {
-			if (mobile.equals(userManager.get(i).getMobile()) && pw.equals(userManager.get(i).getPw())) {
-				check_id = userManager.get(i).getName();
-				LOG = i;
-				break;
-			}
-		}
-		return check_id;
-	}
-
-	// 퇴실하기
-	boolean exit(String mobile) {
-		for (int i = 0; i < userManager.size(); i++) {
-			if (mobile.equals(userManager.get(i).getMobile())) {
-				if (!userManager.get(i).seatUse) {
-					JOptionPane.showMessageDialog(null, "이용중인 좌석이 없습니다.", "", JOptionPane.WARNING_MESSAGE);
-					break;
-				}
-				userManager.get(i).setSeatNum(0);
-				userManager.get(i).seatUse = false;
-				if (userManager.get(i).getMaxTime() > 0) {
-					long time = System.currentTimeMillis() - userManager.get(i).getPreTime();
-					userManager.get(i).setMaxTime(time / 360000);
-				}
-				return true;
-			}
-		}
-		return false;
 	}
 
 	// 파일 저장하기 (좌석)

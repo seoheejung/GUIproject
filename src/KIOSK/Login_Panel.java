@@ -26,10 +26,10 @@ public class Login_Panel extends JPanel implements ActionListener {
 
 	JTextField mobile_tf; // 핸드폰번호 입력창
 	JTextField pw_tf; // 패스워드 입력창
-	
+
 	String mobile = "010";
 	String pw = "";
-	
+
 	Font font;
 
 	Image img = new ImageIcon("./src/Image/main.jpg").getImage();
@@ -40,7 +40,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		buttonSet();
 		textFieldSet();
 		JLabel bg_LB = new JLabel();
-		bg_LB.setBackground(new Color(255,252,248));
+		bg_LB.setBackground(ColorInfo.instance.label_color);
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(90, 240, 360, 300);
 		add(bg_LB);
@@ -49,20 +49,20 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void buttonSet() {
-		font = new Font("나눔고딕", Font.BOLD, 20);
+		font = new Font("나눔바른고딕", Font.BOLD, 25);
 
 		login_btn = new JButton("로그인");
 		login_btn.setBackground(Color.WHITE);
-		login_btn.setForeground(Color.GRAY);
+		login_btn.setForeground(ColorInfo.instance.button_color);
 		login_btn.setFont(font);
 		login_btn.setBounds(135, 400, 270, 50);
 		login_btn.addActionListener(this);
 		add(login_btn);
 
-		font = new Font("나눔고딕", Font.BOLD, 16);
+		font = new Font("나눔바른고딕", Font.BOLD, 16);
 
 		join_btn = new JButton("회원가입");
-		join_btn.setBackground(new Color(76,51,40));
+		join_btn.setBackground(ColorInfo.instance.button_color);
 		join_btn.setForeground(Color.WHITE);
 		join_btn.setFont(font);
 		join_btn.setBounds(135, 480, 120, 40);
@@ -70,7 +70,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		add(join_btn);
 
 		exit_btn = new JButton("퇴실하기");
-		exit_btn.setBackground(new Color(76, 51, 40));
+		exit_btn.setBackground(ColorInfo.instance.button_color);
 		exit_btn.setForeground(Color.WHITE);
 		exit_btn.setFont(font);
 		exit_btn.setBounds(285, 480, 120, 40);
@@ -79,23 +79,23 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void dialButtonSet() {
-		font = new Font("나눔고딕", Font.PLAIN, 18);
+		font = new Font("나눔바른고딕", Font.PLAIN, 18);
 		dial_btn = new JButton[4][3];
 		int num = 1;
 		for (int i = 0; i < dial_btn.length; i++) {
 			for (int n = 0; n < dial_btn[i].length; n++) {
 				dial_btn[i][n] = new JButton();
-				dial_btn[i][n].setBackground(Color.WHITE);
-				dial_btn[i][n].setForeground(new Color(76, 51, 40));
+				dial_btn[i][n].setBackground(ColorInfo.instance.dial_button_color);
+				dial_btn[i][n].setForeground(Color.WHITE);
 				dial_btn[i][n].setFont(font);
 				if (num < 10) {
 					dial_btn[i][n].setText(num + "");
 				} else if (num == 10) {
-					dial_btn[i][n].setText("*");
+					dial_btn[i][n].setText("");
 				} else if (num == 11) {
 					dial_btn[i][n].setText("0");
 				} else if (num == 12) {
-					dial_btn[i][n].setText("/");
+					dial_btn[i][n].setText("DEL");
 				}
 				num++;
 				dial_btn[i][n].setBounds(115 + (n * 120), 580 + (i * 80), 70, 70);
@@ -104,19 +104,40 @@ public class Login_Panel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
+
 	void dialButtonPress(ActionEvent e) {
 		for (int i = 0; i < dial_btn.length; i++) {
 			for (int n = 0; n < dial_btn[i].length; n++) {
-				if(e.getSource() == dial_btn[i][n]) {
-					if(mobile_tf.getText().length() < 11) {
-						mobile += dial_btn[i][n].getText();
-						mobile_tf.setText(mobile);
-						repaint();
-					} else if(mobile_tf.getText().length() > 10) {
-						pw += dial_btn[i][n].getText();
-						pw_tf.setText(pw);
-						repaint();
+				if (e.getSource() == dial_btn[i][n]) {
+					if (!(dial_btn[i][n].getText().equals("DEL"))) {
+						if (mobile_tf.getText().length() < 11) {
+							mobile += dial_btn[i][n].getText();
+							mobile_tf.setText(mobile);
+							repaint();
+						} else if (mobile_tf.getText().length() > 10) {
+							pw += dial_btn[i][n].getText();
+							pw_tf.setText(pw);
+							repaint();
+						}
+					} else {
+						if (mobile_tf.getText().length() < 11) {
+							if (mobile.length() > 0) {
+								mobile = mobile.substring(0, mobile.length() - 1);
+								mobile_tf.setText(mobile);
+							} else {
+								return;
+							}
+							repaint();
+						} else if (mobile_tf.getText().length() > 10) {
+							if (pw.length() > 0) {
+								pw = pw.substring(0, pw.length() - 1);
+								pw_tf.setText(pw);
+							} else {
+								mobile = mobile.substring(0, mobile.length() - 1);
+								mobile_tf.setText(mobile);
+							}
+							repaint();
+						}
 					}
 				}
 			}
@@ -124,12 +145,12 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void textFieldSet() {
-		font = new Font("나눔고딕", Font.PLAIN, 16);
+		font = new Font("나눔바른고딕", Font.PLAIN, 16);
 
 		mobile_tf = new JTextField(15);
 		mobile_tf.setText("010");
 		mobile_tf.setBounds(135, 270, 270, 40);
-		mobile_tf.setBackground(new Color(149,145,135));
+		mobile_tf.setBackground(ColorInfo.instance.textField_color);
 		mobile_tf.setForeground(Color.WHITE);
 		mobile_tf.setFont(font);
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
@@ -139,42 +160,17 @@ public class Login_Panel extends JPanel implements ActionListener {
 		pw_tf = new JTextField(5);
 		pw_tf.setText("비밀번호 입력");
 		pw_tf.setBounds(135, 330, 270, 40);
-		pw_tf.setBackground(new Color(149,145,135));
+		pw_tf.setBackground(ColorInfo.instance.textField_color);
 		pw_tf.setForeground(Color.WHITE);
 		pw_tf.setFont(font);
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);
 		add(pw_tf);
-		
-		pw_tf.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				pw_tf.setText("");
-				repaint();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, 540,960,null);
+		g.drawImage(img, 0, 0, 540, 960, null);
 		setOpaque(false);
 		super.paintComponent(g);
 	}
@@ -202,13 +198,13 @@ public class Login_Panel extends JPanel implements ActionListener {
 			if (log.equals("")) {
 				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "", JOptionPane.WARNING_MESSAGE);
 			} else {
-				if(FileManager.instance.exit(log)) {
+				if (FileManager.instance.exit(log)) {
 					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "", JOptionPane.WARNING_MESSAGE);
 					MainSystem.frame.setContentPane(new Login_Panel());
 					MainSystem.frame.revalidate();
 				}
 			}
-			
+
 		}
 
 	}

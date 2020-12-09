@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 public class MainSystem {
 
-	static JFrame frame = new JFrame();
+	public static JFrame frame = new JFrame();
 
 	public static void main(String[] args) {
 		
@@ -29,7 +29,8 @@ public class MainSystem {
 		// 로그인 창 출력
 		// frame.setContentPane(new Login_Panel());
 		// frame.setContentPane(new Join_Panel());
-		 frame.setContentPane(new Seat_Panel("서희정", "01099374928"));
+		// frame.setContentPane(new Seat_Panel("서희정", "01099374928"));
+		frame.setContentPane(new Purchase_Panel("서희정", "01099374928", 25));
 		frame.revalidate();
 
 	}

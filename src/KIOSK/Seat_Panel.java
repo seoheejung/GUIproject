@@ -15,18 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Seat_Panel extends JPanel implements ActionListener {
-	// 싱글톤 패턴
-
 	Font font;
 	String name;
 	String moblie;
 
 	Image img = new ImageIcon("./src/Image/seat.jpg").getImage();
 
-	JButton back_btn; // 뒤로가기 버튼
+	JButton back_btn; // 로그인화면 버튼
 	JButton update_btn; // 정보수정 버튼
 	JButton[][] seat_btn; // 좌석 버튼
-	SeatInfo[][] seats; // 좌석 객체
 
 	public Seat_Panel(String name, String mobile) {
 		this.name = name;
@@ -35,20 +32,33 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		setLayout(null); // 배치관리자 설정 x
 		info(name, mobile);
 
-		font = new Font("나눔고딕", Font.BOLD, 26);
-		JLabel seat_LB = new JLabel("좌석 이용 현황 : ");
+		font = new Font("나눔바른고딕", Font.BOLD, 22);
+		JLabel seat_LB = new JLabel("좌석 이용 현황 : " + seatUseState());
 		seat_LB.setFont(font);
 		seat_LB.setForeground(Color.black);
-		seat_LB.setBounds(50, 200, 220, 50);
+		seat_LB.setBounds(50, 200, 240, 50);
 		add(seat_LB);
 
 		button();
+	}
+	
+	String seatUseState() {
+		String state = "";
+		int check = 0;
+		for (int i = 0; i < FileManager.instance.seatManager.size(); i++) {
+			if(!FileManager.instance.seatManager.get(i).isSeatUse()) {
+				check +=1;
+			}
+		}
+		
+		state = check + "/" + FileManager.instance.seatManager.size();
+		return state;
 	}
 
 	void button() {
 		seat_btn = new JButton[4][7];
 		int num = 1;
-		font = new Font("나눔고딕", Font.BOLD, 9);
+		font = new Font("나눔바른고딕", Font.BOLD, 9);
 		for (int i = 0; i < seat_btn.length; i++) {
 			for (int n = 0; n < seat_btn[i].length; n++) {
 				seat_btn[i][n] = new JButton();
@@ -74,21 +84,21 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 	void info(String name, String mobile) {
 		// 정보 레이블
-		font = new Font("나눔고딕", Font.BOLD, 40);
+		font = new Font("나눔바른고딕", Font.BOLD, 40);
 		JLabel name_LB = new JLabel(name);
 		name_LB.setFont(font);
 		name_LB.setForeground(Color.white);
 		name_LB.setBounds(40, 60, 120, 40);
 		add(name_LB);
 
-		font = new Font("나눔고딕", Font.BOLD, 16);
+		font = new Font("나눔바른고딕", Font.BOLD, 16);
 		JLabel mobile_LB = new JLabel("HP." + mobile);
 		mobile_LB.setFont(font);
 		mobile_LB.setForeground(Color.white);
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("나눔고딕", Font.BOLD, 22);
+		font = new Font("나눔바른고딕", Font.BOLD, 22);
 		update_btn = new JButton("정보수정");
 		update_btn.setBackground(Color.WHITE);
 		update_btn.setForeground(Color.black);
@@ -118,9 +128,10 @@ public class Seat_Panel extends JPanel implements ActionListener {
 					if (e.getSource() == seat_btn[i][n]) {
 						int temp = Integer.parseInt(seat_btn[i][n].getText());
 						if (FileManager.instance.seatManager.get(temp - 1).isSeatUse()) {
-							JOptionPane.showMessageDialog(null, "사용중인 좌석입니다.", "", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "사용 중인 좌석입니다.", "좌석 선택", JOptionPane.WARNING_MESSAGE);
 						} else {
-						
+							MainSystem.frame.setContentPane(new Purchase_Panel(name, moblie, temp-1));
+							MainSystem.frame.revalidate();
 						}
 					}
 				}

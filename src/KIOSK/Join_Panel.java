@@ -34,14 +34,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	
 	Image img = new ImageIcon("./src/Image/bg.jpg").getImage();
 
-	JButton join_membership_btn; // 회원가입 버튼
+	JButton join_btn; // 회원가입 버튼
 	JButton back_btn; // 뒤로가기 버튼
 
 	public Join_Panel() {
 		setLayout(null);
 
 		// 회원가입 레이블
-		font = new Font("나눔고딕", Font.BOLD, 45);
+		font = new Font("나눔바른고딕", Font.BOLD, 45);
 		JLabel join_LB = new JLabel("회원 가입");
 		join_LB.setFont(font);
 		join_LB.setForeground(Color.WHITE);
@@ -52,25 +52,25 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		buttonSet();
 		
 		JLabel bg_LB = new JLabel();
-		bg_LB.setBackground(new Color(255,252,248));
+		bg_LB.setBackground(ColorInfo.instance.label_color);
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(90, 120, 360, 400);
 		add(bg_LB);
 	}
 	
 	void buttonSet() {
-		font = new Font("나눔고딕", Font.BOLD, 16);
+		font = new Font("나눔바른고딕", Font.BOLD, 16);
 
-		join_membership_btn = new JButton("회원가입");
-		join_membership_btn.setBackground(new Color(76, 51, 40));
-		join_membership_btn.setForeground(Color.WHITE);
-		join_membership_btn.setFont(font);
-		join_membership_btn.setBounds(285, 440, 120, 40);
-		join_membership_btn.addActionListener(this);
-		add(join_membership_btn);
+		join_btn = new JButton("회원가입");
+		join_btn.setBackground(ColorInfo.instance.button_color);
+		join_btn.setForeground(Color.WHITE);
+		join_btn.setFont(font);
+		join_btn.setBounds(285, 440, 120, 40);
+		join_btn.addActionListener(this);
+		add(join_btn);
 
 		back_btn = new JButton("취소");
-		back_btn.setBackground(new Color(76, 51, 40));
+		back_btn.setBackground(ColorInfo.instance.button_color);
 		back_btn.setForeground(Color.WHITE);
 		back_btn.setFont(font);
 		back_btn.setBounds(135, 440, 120, 40);
@@ -79,12 +79,12 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	}
 	
 	void textFieldSet() {
-		font = new Font("나눔고딕", Font.PLAIN, 16);
+		font = new Font("나눔바른고딕", Font.PLAIN, 16);
 		
 		name_tf = new JTextField(15);
 		name_tf.setText("이름");
 		name_tf.setBounds(135, 150, 270, 40);
-		name_tf.setBackground(new Color(149,145,135));
+		name_tf.setBackground(ColorInfo.instance.textField_color);
 		name_tf.setForeground(Color.WHITE);
 		name_tf.setFont(font);
 		name_tf.setHorizontalAlignment(JTextField.CENTER);
@@ -117,7 +117,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		mobile_tf = new JTextField(15);
 		mobile_tf.setText("휴대폰번호");
 		mobile_tf.setBounds(135, 210, 270, 40);
-		mobile_tf.setBackground(new Color(149,145,135));
+		mobile_tf.setBackground(ColorInfo.instance.textField_color);
 		mobile_tf.setForeground(Color.WHITE);
 		mobile_tf.setFont(font);
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
@@ -150,7 +150,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		pw_tf = new JTextField(5);
 		pw_tf.setText("비밀번호");
 		pw_tf.setBounds(135, 270, 270, 40);
-		pw_tf.setBackground(new Color(149,145,135));
+		pw_tf.setBackground(ColorInfo.instance.textField_color);
 		pw_tf.setForeground(Color.WHITE);
 		pw_tf.setFont(font);
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
@@ -183,7 +183,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		confirm_pw_tf = new JTextField(5);
 		confirm_pw_tf.setText("비밀번호확인");
 		confirm_pw_tf.setBounds(135, 330, 270, 40);
-		confirm_pw_tf.setBackground(new Color(149,145,135));
+		confirm_pw_tf.setBackground(ColorInfo.instance.textField_color);
 		confirm_pw_tf.setForeground(Color.WHITE);
 		confirm_pw_tf.setFont(font);
 		confirm_pw_tf.setHorizontalAlignment(JTextField.CENTER);
@@ -215,10 +215,11 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		
 		check.setBounds(135, 390, 200, 30);
 		check.setFont(font);
-		check.setBackground(new Color(255,252,248));
+		check.setBackground(ColorInfo.instance.label_color);
 		check.addItemListener(this);
 		add(check);
 	}
+	
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -233,7 +234,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
-		} else if (e.getSource() == join_membership_btn) {
+		} else if (e.getSource() == join_btn) {
 			// 회원가입 버튼 눌렀을 때
 			if (name_tf.getText().equals("") || mobile_tf.getText().equals("") || pw_tf.getText().equals("")
 					|| confirm_pw_tf.getText().equals("")) {
