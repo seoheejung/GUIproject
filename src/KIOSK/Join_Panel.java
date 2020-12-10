@@ -27,6 +27,13 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	JTextField pw_tf; // 비밀번호 입력창
 	JTextField confirm_pw_tf; // 비밀번호 확인 입력창
 
+	String name = "";
+	String mobile = "";
+	String pw = "";
+	String confirm_pw = "";
+
+	int position = -1;
+
 	JCheckBox check = new JCheckBox("개인정보취급방침동의"); // 개인정보취급방침동의 체크박스
 	boolean isChecked = false;
 
@@ -36,6 +43,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	JButton join_btn; // 회원가입 버튼
 	JButton back_btn; // 뒤로가기 버튼
+	KeyBoard_btn_Setting keyBoard;
 
 	public Join_Panel() {
 		setLayout(null);
@@ -56,6 +64,63 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(90, 120, 360, 400);
 		add(bg_LB);
+
+		keyBoard = new KeyBoard_btn_Setting();
+		for (int i = 0; i < keyBoard.firstLine_btn.length; i++) {
+			keyBoard.firstLine_btn[i].addActionListener(this);
+			add(keyBoard.firstLine_btn[i]);
+		}
+		for (int i = 0; i < keyBoard.secondLine_btn.length; i++) {
+			keyBoard.secondLine_btn[i].addActionListener(this);
+			add(keyBoard.secondLine_btn[i]);
+		}
+
+		for (int i = 0; i < keyBoard.thirdLine_btn.length; i++) {
+			keyBoard.thirdLine_btn[i].addActionListener(this);
+			add(keyBoard.thirdLine_btn[i]);
+		}
+
+		for (int i = 0; i < keyBoard.fourthLine_btn.length; i++) {
+			keyBoard.fourthLine_btn[i].addActionListener(this);
+			add(keyBoard.fourthLine_btn[i]);
+		}
+	}
+
+	void keyBoardButtonPress(ActionEvent e) {
+		String temp = "";
+		temp = keyBoard.keyBoardButtonPress(e);
+
+		if (position == 1) {
+			if (name.length() > 0 && temp.equals("◁")) {
+				name = name.substring(0, name.length() - 1);
+			} else {
+				name += temp;
+			}
+			name_tf.setText(name);
+		} else if (position == 2) {
+			if (mobile.length() > 0 && temp.equals("◁")) {
+				mobile = mobile.substring(0, mobile.length() - 1);
+			} else {
+				mobile += temp;
+			}
+			mobile_tf.setText(mobile);
+		} else if (position == 3) {
+			if (pw.length() > 0 && temp.equals("◁")) {
+				pw = pw.substring(0, pw.length() - 1);
+			} else {
+				pw += temp;
+			}
+			pw_tf.setText(pw);
+		} else if (position == 4) {
+			if (confirm_pw.length() > 0 && temp.equals("◁")) {
+				confirm_pw = confirm_pw.substring(0, confirm_pw.length() - 1);
+			} else {
+				confirm_pw += temp;
+			}
+			confirm_pw_tf.setText(confirm_pw);
+		}
+
+		repaint();
 	}
 
 	void buttonSet() {
@@ -95,6 +160,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				name_tf.setText("");
+				position = 1;
 				repaint();
 			}
 
@@ -129,6 +195,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				mobile_tf.setText("");
+				position = 2;
 				repaint();
 			}
 
@@ -163,6 +230,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				pw_tf.setText("");
+				position = 3;
 				repaint();
 			}
 
@@ -197,6 +265,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				confirm_pw_tf.setText("");
+				position = 4;
 				repaint();
 			}
 
@@ -233,6 +302,8 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		keyBoardButtonPress(e);
+
 		// 취소 버튼 눌렀을 때 로그인창으로 이동
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
@@ -269,7 +340,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			user.setPreTime(0);
 
 			FileManager.instance.addUser(user);
-			JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "Message", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		}

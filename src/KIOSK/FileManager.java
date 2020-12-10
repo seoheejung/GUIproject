@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
@@ -27,6 +28,8 @@ public class FileManager {
 
 	ArrayList<UserInfo> userManager = null;
 	ArrayList<SeatInfo> seatManager = null;
+	
+	Calendar cal = Calendar.getInstance();
 
 	// 싱글톤 패턴
 	public static FileManager instance = new FileManager();
@@ -83,11 +86,9 @@ public class FileManager {
 				userManager.get(i).setSeatNum(0);
 				userManager.get(i).seatUse = false;
 				if (userManager.get(i).getMaxTime() > 0) {
-					long time = (System.currentTimeMillis() / (1000 * 60 * 60)) - userManager.get(i).getPreTime();
-					System.out.println(System.currentTimeMillis() / (1000 * 60 * 60));
-					System.out.println(userManager.get(i).getPreTime());
-					time = userManager.get(i).getMaxTime() - time;
-					userManager.get(i).setMaxTime(time);
+					
+					long time = (long) cal.get(Calendar.HOUR_OF_DAY);
+					userManager.get(i).setMaxTime(userManager.get(i).getMaxTime() - time);
 					userManager.get(i).setPreTime(0);
 				}
 				updateUser(i, userManager.get(i));
@@ -103,14 +104,12 @@ public class FileManager {
 			if (mobile.equals(userManager.get(i).getMobile())) {
 				userManager.get(i).setSeatNum(seatNum);
 				userManager.get(i).setMaxTime(Long.parseLong(useTime));
-				System.out.println(System.currentTimeMillis() / (1000 * 60 * 60));
-				userManager.get(i).setPreTime(System.currentTimeMillis() / (1000 * 60 * 60));
+				userManager.get(i).setPreTime(1);
 				userManager.get(i).seatUse = true;
 				updateUser(i, userManager.get(i));
 			} else {
 				JOptionPane.showMessageDialog(null, "비정상적인 접근입니다.", "Message", JOptionPane.WARNING_MESSAGE);
-				MainSystem.frame.setContentPane(new Login_Panel());
-				MainSystem.frame.revalidate();
+				System.exit(0);
 			}
 		}
 
@@ -120,6 +119,9 @@ public class FileManager {
 				saveSeatData();
 			}
 		}
+		JOptionPane.showMessageDialog(null, "영수증이 출력되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE );
+		MainSystem.frame.setContentPane(new Login_Panel());
+		MainSystem.frame.revalidate();
 	}
 
 	private void addData() {
@@ -169,7 +171,7 @@ public class FileManager {
 		temp.setPw(userinfo[2]);
 		temp.setSeatNum(Integer.parseInt(userinfo[3]));
 		temp.setMaxTime(Integer.parseInt(userinfo[4]));
-		temp.setPreTime(Integer.parseInt(userinfo[5]));
+		temp.setPreTime(0);
 		temp.seatUse = Boolean.valueOf(userinfo[6]);
 		userManager.add(temp);
 	}

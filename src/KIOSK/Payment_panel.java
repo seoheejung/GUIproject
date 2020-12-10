@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -189,14 +190,15 @@ public class Payment_panel extends JPanel implements ActionListener {
 	}
 
 	void moneyButtonSet() {
-		font = new Font("나눔바른고딕", Font.PLAIN, 17);
+		font = new Font("나눔바른고딕", Font.PLAIN, 22);
 		money_Btn = new JButton[4];
 		for (int i = 0; i < money_Btn.length; i++) {
 			money_Btn[i] = new JButton(arMoneyKind[i] + "");
 			money_Btn[i].setBackground(new Color(210, 210, 210));
-			money_Btn[i].setForeground(Color.BLACK);
+			money_Btn[i].setForeground(Color.WHITE);
 			money_Btn[i].setFont(font);
-			money_Btn[i].setBounds(50 + i * 110, 660, 100, 60);
+			money_Btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
+			money_Btn[i].setBounds(60 + i * 110, 670, 90, 60);
 			money_Btn[i].addActionListener(this);
 			add(money_Btn[i]);
 		}
@@ -293,14 +295,13 @@ public class Payment_panel extends JPanel implements ActionListener {
 			repaint();
 		} else if (e.getSource() == cardPayment_btn) {
 			JOptionPane.showMessageDialog(null, "준비 중입니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
-			return;
 		} else if (e.getSource() == cancel_btn) {
-			JOptionPane.showMessageDialog(null, "결제가 취소되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "결제가 취소되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE );
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		} else if (e.getSource() == payment_btn) {
 			if (purchase()) {
-				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE );
 				if (!useTime.equals("")) {
 					String temp = "";
 					System.out.println(useTime);

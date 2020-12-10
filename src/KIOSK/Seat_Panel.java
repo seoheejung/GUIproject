@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,12 +59,13 @@ public class Seat_Panel extends JPanel implements ActionListener {
 	void seatButtonSet() {
 		seat_btn = new JButton[4][7];
 		int num = 1;
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 9);
+		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 17);
 		for (int i = 0; i < seat_btn.length; i++) {
 			for (int n = 0; n < seat_btn[i].length; n++) {
 				seat_btn[i][n] = new JButton();
 				seat_btn[i][n].setText(num + "");
 				seat_btn[i][n].setFont(font);
+				seat_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
 				seat_btn[i][n].setBackground(Color.lightGray);
 				if (FileManager.instance.seatManager.get(num - 1).isSeatUse()) {
 					seat_btn[i][n].setBackground(Color.black);

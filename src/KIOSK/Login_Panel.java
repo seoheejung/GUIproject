@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,6 +30,8 @@ public class Login_Panel extends JPanel implements ActionListener {
 
 	String mobile = "010";
 	String pw = "";
+
+	int position = -1;
 
 	Font font;
 
@@ -79,7 +82,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void dialButtonSet() {
-		font = new Font("나눔바른고딕", Font.PLAIN, 18);
+		font = new Font("나눔바른고딕", Font.PLAIN, 28);
 		dial_btn = new JButton[4][3];
 		int num = 1;
 		for (int i = 0; i < dial_btn.length; i++) {
@@ -88,10 +91,11 @@ public class Login_Panel extends JPanel implements ActionListener {
 				dial_btn[i][n].setBackground(ColorInfo.instance.dial_button_color);
 				dial_btn[i][n].setForeground(Color.WHITE);
 				dial_btn[i][n].setFont(font);
+				dial_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
 				if (num < 10) {
 					dial_btn[i][n].setText(num + "");
 				} else if (num == 10) {
-					dial_btn[i][n].setText("");
+					dial_btn[i][n].setText("CLE");
 				} else if (num == 11) {
 					dial_btn[i][n].setText("0");
 				} else if (num == 12) {
@@ -106,39 +110,30 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void dialButtonPress(ActionEvent e) {
+
 		for (int i = 0; i < dial_btn.length; i++) {
 			for (int n = 0; n < dial_btn[i].length; n++) {
 				if (e.getSource() == dial_btn[i][n]) {
-					if (!(dial_btn[i][n].getText().equals("DEL"))) {
-						if (mobile_tf.getText().length() < 11) {
+					if (position == 1) {
+						if (mobile.length() > 0 && dial_btn[i][n].getText().equals("DEL")) {
+							mobile = mobile.substring(0, mobile.length() - 1);
+						} else if (dial_btn[i][n].getText().equals("CLE")) {
+							mobile = "";
+						} else {
 							mobile += dial_btn[i][n].getText();
-							mobile_tf.setText(mobile);
-							repaint();
-						} else if (mobile_tf.getText().length() > 10) {
+						}
+						mobile_tf.setText(mobile);
+					} else if (position == 2) {
+						if (pw.length() > 0 && dial_btn[i][n].getText().equals("DEL")) {
+							pw = mobile.substring(0, pw.length() - 1);
+						} else if (dial_btn[i][n].getText().equals("CLE")) {
+							pw = "";
+						} else {
 							pw += dial_btn[i][n].getText();
-							pw_tf.setText(pw);
-							repaint();
 						}
-					} else {
-						if (mobile_tf.getText().length() < 11) {
-							if (mobile.length() > 0) {
-								mobile = mobile.substring(0, mobile.length() - 1);
-								mobile_tf.setText(mobile);
-							} else {
-								return;
-							}
-							repaint();
-						} else if (mobile_tf.getText().length() > 10) {
-							if (pw.length() > 0) {
-								pw = pw.substring(0, pw.length() - 1);
-								pw_tf.setText(pw);
-							} else {
-								mobile = mobile.substring(0, mobile.length() - 1);
-								mobile_tf.setText(mobile);
-							}
-							repaint();
-						}
+						pw_tf.setText(pw);
 					}
+					repaint();
 				}
 			}
 		}
@@ -157,6 +152,29 @@ public class Login_Panel extends JPanel implements ActionListener {
 		mobile_tf.addActionListener(this);
 		add(mobile_tf);
 
+		mobile_tf.addMouseListener(new MouseListener() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				position = 1;
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+
 		pw_tf = new JTextField(5);
 		pw_tf.setText("비밀번호 입력");
 		pw_tf.setBounds(135, 330, 270, 40);
@@ -166,6 +184,31 @@ public class Login_Panel extends JPanel implements ActionListener {
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);
 		add(pw_tf);
+		pw_tf.addMouseListener(new MouseListener() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (pw_tf.getText().equals("비밀번호 입력"))
+					pw_tf.setText("");
+				position = 2;
+				repaint();
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 	}
 
 	@Override
@@ -202,7 +245,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 					MainSystem.frame.setContentPane(new Login_Panel());
 					MainSystem.frame.revalidate();
-				} 
+				}
 			}
 
 		}

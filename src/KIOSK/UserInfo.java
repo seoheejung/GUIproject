@@ -1,5 +1,7 @@
 package KIOSK;
 
+import java.util.Calendar;
+
 // 회원 클래스
 public class UserInfo {
 	private String name;
@@ -47,6 +49,7 @@ public class UserInfo {
 	}
 
 	public void setMaxTime(long maxTime) {
+		
 		this.maxTime = maxTime;
 	}
 
@@ -55,7 +58,14 @@ public class UserInfo {
 	}
 
 	public void setPreTime(long preTime) {
-		this.preTime = preTime;
+		int hour = FileManager.instance.cal.get(Calendar.HOUR_OF_DAY);
+		
+		if(preTime == 0) {
+			this.preTime = preTime;
+		}else {
+			this.preTime = hour;
+		}
+		
 	}
 
 }
