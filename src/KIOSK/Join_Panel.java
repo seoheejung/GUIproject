@@ -48,22 +48,25 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	public Join_Panel() {
 		setLayout(null);
+		
+		font = new Font("나눔스퀘어", Font.PLAIN, 25);
 
-		// 회원가입 레이블
-		font = new Font("나눔스퀘어", Font.PLAIN, 45);
 		JLabel join_LB = new JLabel("회원 가입");
 		join_LB.setFont(font);
 		join_LB.setForeground(Color.WHITE);
-		join_LB.setBounds(180, 50, 270, 50);
+		join_LB.setBackground(ColorInfo.instance.title_font_color);
+		join_LB.setOpaque(true);
+		join_LB.setHorizontalAlignment(JTextField.CENTER);
+		join_LB.setBounds(170, 90, 200, 50);
 		add(join_LB);
 
 		textFieldSet();
 		buttonSet();
 
 		JLabel bg_LB = new JLabel();
-		bg_LB.setBackground(ColorInfo.instance.label_color);
+		bg_LB.setBackground(ColorInfo.instance.bg_color);
 		bg_LB.setOpaque(true);
-		bg_LB.setBounds(90, 120, 360, 400);
+		bg_LB.setBounds(90, 170, 360, 410);
 		add(bg_LB);
 
 		keyBoard = new KeyBoard_btn_Setting();
@@ -132,21 +135,21 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	}
 
 	void buttonSet() {
-		font = new Font("나눔스퀘어", Font.BOLD, 16);
+		font = new Font("나눔스퀘어", Font.PLAIN, 18);
 
 		join_btn = new JButton("회원가입");
 		join_btn.setBackground(ColorInfo.instance.button_color);
 		join_btn.setForeground(Color.WHITE);
 		join_btn.setFont(font);
-		join_btn.setBounds(285, 440, 120, 40);
+		join_btn.setBounds(285, 510, 120, 40);
 		join_btn.addActionListener(this);
 		add(join_btn);
 
 		back_btn = new JButton("취소");
-		back_btn.setBackground(ColorInfo.instance.button_color);
-		back_btn.setForeground(Color.WHITE);
+		back_btn.setBackground(ColorInfo.instance.button_sub_color);
+		back_btn.setForeground(Color.BLACK);
 		back_btn.setFont(font);
-		back_btn.setBounds(135, 440, 120, 40);
+		back_btn.setBounds(135, 510, 120, 40);
 		back_btn.addActionListener(this);
 		add(back_btn);
 	}
@@ -156,9 +159,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 		name_tf = new JTextField(15);
 		name_tf.setText("이름");
-		name_tf.setBounds(135, 150, 270, 40);
-		name_tf.setBackground(ColorInfo.instance.textField_color);
-		name_tf.setForeground(Color.WHITE);
+		name_tf.setBounds(135, 200, 270, 40);
+		name_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		name_tf.setForeground(ColorInfo.instance.textField_font_color);
 		name_tf.setFont(font);
 		name_tf.setHorizontalAlignment(JTextField.CENTER);
 		name_tf.addActionListener(this);
@@ -191,9 +194,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 		mobile_tf = new JTextField(15);
 		mobile_tf.setText("휴대폰번호");
-		mobile_tf.setBounds(135, 210, 270, 40);
-		mobile_tf.setBackground(ColorInfo.instance.textField_color);
-		mobile_tf.setForeground(Color.WHITE);
+		mobile_tf.setBounds(135, 260, 270, 40);
+		mobile_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		mobile_tf.setForeground(ColorInfo.instance.textField_font_color);
 		mobile_tf.setFont(font);
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
 		mobile_tf.addActionListener(this);
@@ -226,9 +229,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 		pw_tf = new JTextField(5);
 		pw_tf.setText("비밀번호");
-		pw_tf.setBounds(135, 270, 270, 40);
-		pw_tf.setBackground(ColorInfo.instance.textField_color);
-		pw_tf.setForeground(Color.WHITE);
+		pw_tf.setBounds(135, 320, 270, 40);
+		pw_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		pw_tf.setForeground(ColorInfo.instance.textField_font_color);
 		pw_tf.setFont(font);
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);
@@ -261,9 +264,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 		confirm_pw_tf = new JTextField(5);
 		confirm_pw_tf.setText("비밀번호확인");
-		confirm_pw_tf.setBounds(135, 330, 270, 40);
-		confirm_pw_tf.setBackground(ColorInfo.instance.textField_color);
-		confirm_pw_tf.setForeground(Color.WHITE);
+		confirm_pw_tf.setBounds(135, 380, 270, 40);
+		confirm_pw_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		confirm_pw_tf.setForeground(ColorInfo.instance.textField_font_color);
 		confirm_pw_tf.setFont(font);
 		confirm_pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		confirm_pw_tf.addActionListener(this);
@@ -294,9 +297,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			}
 		});
 
-		check.setBounds(135, 390, 200, 30);
+		check.setBounds(135, 440, 200, 30);
 		check.setFont(font);
-		check.setBackground(ColorInfo.instance.label_color);
+		check.setBackground(ColorInfo.instance.bg_color);
 		check.addItemListener(this);
 		add(check);
 	}

@@ -43,7 +43,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		buttonSet();
 		textFieldSet();
 		JLabel bg_LB = new JLabel();
-		bg_LB.setBackground(ColorInfo.instance.label_color);
+		bg_LB.setBackground(ColorInfo.instance.bg_color);
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(90, 240, 360, 300);
 		add(bg_LB);
@@ -55,28 +55,28 @@ public class Login_Panel extends JPanel implements ActionListener {
 		font = new Font("나눔스퀘어", Font.BOLD, 25);
 
 		login_btn = new JButton("로그인");
-		login_btn.setBackground(Color.WHITE);
-		login_btn.setForeground(ColorInfo.instance.button_color);
+		login_btn.setBackground(ColorInfo.instance.button_color);
+		login_btn.setForeground(Color.WHITE);
 		login_btn.setFont(font);
-		login_btn.setBounds(135, 400, 270, 50);
+		login_btn.setBounds(135, 390, 270, 50);
 		login_btn.addActionListener(this);
 		add(login_btn);
 
-		font = new Font("나눔스퀘어", Font.BOLD, 16);
+		font = new Font("나눔스퀘어", Font.PLAIN, 16);
 
 		join_btn = new JButton("회원가입");
-		join_btn.setBackground(ColorInfo.instance.button_color);
-		join_btn.setForeground(Color.WHITE);
+		join_btn.setBackground(ColorInfo.instance.button_sub_color);
+		join_btn.setForeground(Color.BLACK);
 		join_btn.setFont(font);
-		join_btn.setBounds(135, 480, 120, 40);
+		join_btn.setBounds(135, 470, 120, 40);
 		join_btn.addActionListener(this);
 		add(join_btn);
 
 		checkOut_btn = new JButton("퇴실하기");
-		checkOut_btn.setBackground(ColorInfo.instance.button_color);
-		checkOut_btn.setForeground(Color.WHITE);
+		checkOut_btn.setBackground(ColorInfo.instance.button_sub_color);
+		checkOut_btn.setForeground(Color.BLACK);
 		checkOut_btn.setFont(font);
-		checkOut_btn.setBounds(285, 480, 120, 40);
+		checkOut_btn.setBounds(285, 470, 120, 40);
 		checkOut_btn.addActionListener(this);
 		add(checkOut_btn);
 	}
@@ -88,8 +88,8 @@ public class Login_Panel extends JPanel implements ActionListener {
 		for (int i = 0; i < dial_btn.length; i++) {
 			for (int n = 0; n < dial_btn[i].length; n++) {
 				dial_btn[i][n] = new JButton();
+				dial_btn[i][n].setForeground(ColorInfo.instance.button_color);
 				dial_btn[i][n].setBackground(ColorInfo.instance.dial_button_color);
-				dial_btn[i][n].setForeground(Color.WHITE);
 				dial_btn[i][n].setFont(font);
 				dial_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				if (num < 10) {
@@ -150,8 +150,8 @@ public class Login_Panel extends JPanel implements ActionListener {
 		mobile_tf = new JTextField(15);
 		mobile_tf.setText("010");
 		mobile_tf.setBounds(135, 270, 270, 40);
-		mobile_tf.setBackground(ColorInfo.instance.textField_color);
-		mobile_tf.setForeground(Color.WHITE);
+		mobile_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		mobile_tf.setForeground(ColorInfo.instance.textField_font_color);
 		mobile_tf.setFont(font);
 		mobile_tf.setHorizontalAlignment(JTextField.CENTER);
 		mobile_tf.addActionListener(this);
@@ -183,8 +183,8 @@ public class Login_Panel extends JPanel implements ActionListener {
 		pw_tf = new JTextField(5);
 		pw_tf.setText("비밀번호 입력");
 		pw_tf.setBounds(135, 330, 270, 40);
-		pw_tf.setBackground(ColorInfo.instance.textField_color);
-		pw_tf.setForeground(Color.WHITE);
+		pw_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		pw_tf.setForeground(ColorInfo.instance.textField_font_color);
 		pw_tf.setFont(font);
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);

@@ -57,16 +57,16 @@ public class Select_Panel extends JPanel implements ActionListener {
 		goods_LB.setFont(font);
 		goods_LB.setForeground(Color.WHITE);
 		goods_LB.setOpaque(true);
-		goods_LB.setBackground(ColorInfo.instance.dial_button_color);
-		goods_LB.setBounds(50, 200, 170, 50);
+		goods_LB.setBackground(ColorInfo.instance.title_font_color);
+		goods_LB.setBounds(50, 200, 150, 50);
 		add(goods_LB);
 
 		hour_LB = new JLabel(" [2] 시간 선택");
 		hour_LB.setFont(font);
 		hour_LB.setForeground(Color.WHITE);
 		hour_LB.setOpaque(true);
-		hour_LB.setBackground(ColorInfo.instance.dial_button_color);
-		hour_LB.setBounds(50, 360, 170, 50);
+		hour_LB.setBackground(ColorInfo.instance.title_font_color);
+		hour_LB.setBounds(50, 360, 150, 50);
 		hour_LB.setVisible(false);
 		add(hour_LB);
 
@@ -74,8 +74,8 @@ public class Select_Panel extends JPanel implements ActionListener {
 		summary_LB.setFont(font);
 		summary_LB.setForeground(Color.WHITE);
 		summary_LB.setOpaque(true);
-		summary_LB.setBackground(ColorInfo.instance.dial_button_color);
-		summary_LB.setBounds(50, 680, 170, 50);
+		summary_LB.setBackground(ColorInfo.instance.title_font_color);
+		summary_LB.setBounds(50, 680, 150, 50);
 		summary_LB.setVisible(false);
 		add(summary_LB);
 
@@ -94,13 +94,13 @@ public class Select_Panel extends JPanel implements ActionListener {
 		hourTicket_rd = new JRadioButton(" 시간권");
 		hourTicket_rd.setBounds(80, 260, 240, 40);
 		hourTicket_rd.setFont(font);
-		hourTicket_rd.setBackground(new Color(255, 252, 248));
+		hourTicket_rd.setBackground(ColorInfo.instance.dial_button_color);
 		hourTicket_rd.addActionListener(this);
 
 		fixedTicket_rd = new JRadioButton(" 정액권");
 		fixedTicket_rd.setBounds(80, 300, 240, 40);
 		fixedTicket_rd.setFont(font);
-		fixedTicket_rd.setBackground(new Color(255, 252, 248));
+		fixedTicket_rd.setBackground(ColorInfo.instance.dial_button_color);
 		fixedTicket_rd.addActionListener(this);
 
 		Ticket_gp.add(hourTicket_rd);
@@ -120,7 +120,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 			hour_rd[i] = new JRadioButton(" " + (i + 1) * 2 + "시간");
 			hour_rd[i].setBounds(80, 420 + i * 40, 240, 40);
 			hour_rd[i].setFont(font);
-			hour_rd[i].setBackground(new Color(255, 252, 248));
+			hour_rd[i].setBackground(ColorInfo.instance.dial_button_color);
 			hour_rd[i].addActionListener(this);
 			hour_rd[i].setVisible(false);
 			hourTicket_gp.add(hour_rd[i]);
@@ -137,7 +137,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 			fixed_rd[i] = new JRadioButton(" " + (i + 1) * 50 + "시간");
 			fixed_rd[i].setBounds(80, 420 + i * 40, 240, 40);
 			fixed_rd[i].setFont(font);
-			fixed_rd[i].setBackground(new Color(255, 252, 248));
+			fixed_rd[i].setBackground(ColorInfo.instance.dial_button_color);
 			fixed_rd[i].addActionListener(this);
 			fixed_rd[i].setVisible(false);
 			fixedTicket_gp.add(fixed_rd[i]);
@@ -186,7 +186,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		seatNum_LB = new JLabel("· 이용좌석          " + seatNum + "번");
 		seatNum_LB.setFont(font);
 		seatNum_LB.setForeground(Color.BLACK);
-		seatNum_LB.setBackground(ColorInfo.instance.label_color);
+		seatNum_LB.setBackground(ColorInfo.instance.dial_button_color);
 		seatNum_LB.setOpaque(true);
 		seatNum_LB.setVisible(true);
 		seatNum_LB.setBounds(70, 740, 240, 40);
@@ -195,7 +195,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		useTime_LB = new JLabel("· 이용시간         " + useTime);
 		useTime_LB.setFont(font);
 		useTime_LB.setForeground(Color.BLACK);
-		useTime_LB.setBackground(ColorInfo.instance.label_color);
+		useTime_LB.setBackground(ColorInfo.instance.dial_button_color);
 		useTime_LB.setOpaque(true);
 		useTime_LB.setVisible(true);
 		useTime_LB.setBounds(70, 780, 240, 40);
@@ -204,7 +204,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		totalPrice_LB = new JLabel("· 결제금액          " + priceReturn(useTime) + "원");
 		totalPrice_LB.setFont(font);
 		totalPrice_LB.setForeground(Color.BLACK);
-		totalPrice_LB.setBackground(ColorInfo.instance.label_color);
+		totalPrice_LB.setBackground(ColorInfo.instance.dial_button_color);
 		totalPrice_LB.setOpaque(true);
 		totalPrice_LB.setVisible(true);
 		totalPrice_LB.setBounds(70, 820, 240, 40);
@@ -213,7 +213,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		font = new Font("나눔스퀘어", Font.PLAIN, 24);
 		next_btn = new JButton("다음");
 		next_btn.setForeground(Color.gray);
-		next_btn.setBackground(ColorInfo.instance.label_color);
+		next_btn.setBackground(ColorInfo.instance.dial_button_color);
 		next_btn.setFont(font);
 		next_btn.setBounds(340, 790, 120, 60);
 		next_btn.setVisible(true);
@@ -245,9 +245,9 @@ public class Select_Panel extends JPanel implements ActionListener {
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("나눔스퀘어", Font.BOLD, 22);
+		font = new Font("나눔스퀘어", Font.PLAIN, 22);
 		seat_btn = new JButton("좌석화면");
-		seat_btn.setBackground(ColorInfo.instance.label_color);
+		seat_btn.setBackground(ColorInfo.instance.button_sub_color);
 		seat_btn.setForeground(Color.black);
 		seat_btn.setFont(font);
 		seat_btn.setBounds(240, 70, 120, 60);
@@ -255,7 +255,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		add(seat_btn);
 
 		login_btn = new JButton("처음으로");
-		login_btn.setBackground(ColorInfo.instance.label_color);
+		login_btn.setBackground(ColorInfo.instance.button_sub_color);
 		login_btn.setForeground(Color.black);
 		login_btn.setFont(font);
 		login_btn.setBounds(380, 70, 120, 60);

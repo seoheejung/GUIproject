@@ -30,48 +30,48 @@ public class KeyBoard_btn_Setting implements ActionListener {
 			firstLine_btn[i] = new JButton();
 			firstLine_btn[i].setFont(font);
 			firstLine_btn[i].setForeground(ColorInfo.instance.button_color);
-			firstLine_btn[i].setBackground(Color.WHITE);
+			firstLine_btn[i].setBackground(ColorInfo.instance.dial_button_color);
 			firstLine_btn[i].setOpaque(true);
 			firstLine_btn[i].setVisible(true);
 			firstLine_btn[i].setText(firstLine_btn_Text[i]);
 			firstLine_btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
-			firstLine_btn[i].setBounds(50 + (i * 45), 580, 40, 40);
+			firstLine_btn[i].setBounds(50 + (i * 45), 620, 40, 40);
 		}
 		
 		for (int i = 0; i < secondLine_btn.length; i++) {
 			secondLine_btn[i] = new JButton();
 			secondLine_btn[i].setFont(font);
 			secondLine_btn[i].setForeground(ColorInfo.instance.button_color);
-			secondLine_btn[i].setBackground(Color.WHITE);
+			secondLine_btn[i].setBackground(ColorInfo.instance.dial_button_color);
 			secondLine_btn[i].setOpaque(true);
 			secondLine_btn[i].setVisible(true);
 			secondLine_btn[i].setText(secondLine_btn_Text[i]);
 			secondLine_btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
-			secondLine_btn[i].setBounds(50 + (i * 45), 650, 40, 40);
+			secondLine_btn[i].setBounds(50 + (i * 45), 690, 40, 40);
 		}
 		
 		for (int i = 0; i < thirdLine_btn.length; i++) {
 			thirdLine_btn[i] = new JButton();
 			thirdLine_btn[i].setFont(font);
 			thirdLine_btn[i].setForeground(ColorInfo.instance.button_color);
-			thirdLine_btn[i].setBackground(Color.WHITE);
+			thirdLine_btn[i].setBackground(ColorInfo.instance.dial_button_color);
 			thirdLine_btn[i].setOpaque(true);
 			thirdLine_btn[i].setVisible(true);
 			thirdLine_btn[i].setText(thirdLine_btn_Text[i]);
 			thirdLine_btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
-			thirdLine_btn[i].setBounds(70 + (i * 45), 720, 40, 40);
+			thirdLine_btn[i].setBounds(70 + (i * 45), 760, 40, 40);
 		}
 		
 		for (int i = 0; i < fourthLine_btn.length; i++) {
 			fourthLine_btn[i] = new JButton();
 			fourthLine_btn[i].setFont(font);
 			fourthLine_btn[i].setForeground(ColorInfo.instance.button_color);
-			fourthLine_btn[i].setBackground(Color.WHITE);
+			fourthLine_btn[i].setBackground(ColorInfo.instance.dial_button_color);
 			fourthLine_btn[i].setOpaque(true);
 			fourthLine_btn[i].setVisible(true);
 			fourthLine_btn[i].setText(fourthLine_btn_Text[i]);
 			fourthLine_btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
-			fourthLine_btn[i].setBounds(90 + (i * 45), 790, 40, 40);
+			fourthLine_btn[i].setBounds(90 + (i * 45), 830, 40, 40);
 		}
 		
 	}

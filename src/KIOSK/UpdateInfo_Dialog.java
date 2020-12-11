@@ -45,14 +45,14 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 
 		font = new Font("나눔스퀘어", Font.PLAIN, 25);
 
-		JLabel join_LB = new JLabel("비밀번호 변경");
-		join_LB.setFont(font);
-		join_LB.setForeground(Color.WHITE);
-		join_LB.setBackground(ColorInfo.instance.dial_button_color);
-		join_LB.setOpaque(true);
-		join_LB.setHorizontalAlignment(JTextField.CENTER);
-		join_LB.setBounds(130, 30, 160, 50);
-		add(join_LB);
+		JLabel update_LB = new JLabel("비밀번호 변경");
+		update_LB.setFont(font);
+		update_LB.setForeground(Color.WHITE);
+		update_LB.setBackground(ColorInfo.instance.title_font_color);
+		update_LB.setOpaque(true);
+		update_LB.setHorizontalAlignment(JTextField.CENTER);
+		update_LB.setBounds(130, 35, 160, 50);
+		add(update_LB);
 
 		textFieldSet();
 		dialButtonSet();
@@ -68,7 +68,7 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 		add(ok_btn);
 
 		cancel_btn = new JButton("취소");
-		cancel_btn.setBackground(Color.WHITE);
+		cancel_btn.setBackground(ColorInfo.instance.button_sub_color);
 		cancel_btn.setForeground(Color.GRAY);
 		cancel_btn.setFont(font);
 		cancel_btn.setBounds(90, 490, 100, 40);
@@ -76,7 +76,7 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 		add(cancel_btn);
 
 		JLabel bg_LB = new JLabel();
-		bg_LB.setBackground(ColorInfo.instance.label_color);
+		bg_LB.setBackground(ColorInfo.instance.bg_color);
 		bg_LB.setOpaque(true);
 		bg_LB.setBounds(12, 10, 410, 540);
 		add(bg_LB);
@@ -89,8 +89,8 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 		pw_tf = new JTextField(5);
 		pw_tf.setText("변경할 비밀번호");
 		pw_tf.setBounds(90, 110, 240, 40);
-		pw_tf.setBackground(ColorInfo.instance.textField_color);
-		pw_tf.setForeground(Color.WHITE);
+		pw_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		pw_tf.setForeground(ColorInfo.instance.textField_font_color);
 		pw_tf.setFont(font);
 		pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		pw_tf.addActionListener(this);
@@ -124,8 +124,8 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 		confirm_pw_tf = new JTextField(5);
 		confirm_pw_tf.setText("비밀번호확인");
 		confirm_pw_tf.setBounds(90, 170, 240, 40);
-		confirm_pw_tf.setBackground(ColorInfo.instance.textField_color);
-		confirm_pw_tf.setForeground(Color.WHITE);
+		confirm_pw_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		confirm_pw_tf.setForeground(ColorInfo.instance.textField_font_color);
 		confirm_pw_tf.setFont(font);
 		confirm_pw_tf.setHorizontalAlignment(JTextField.CENTER);
 		confirm_pw_tf.addActionListener(this);
@@ -165,8 +165,8 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 		for (int i = 0; i < dial_btn.length; i++) {
 			for (int n = 0; n < dial_btn[i].length; n++) {
 				dial_btn[i][n] = new JButton();
-				dial_btn[i][n].setBackground(Color.WHITE);
-				dial_btn[i][n].setForeground(Color.BLACK);
+				dial_btn[i][n].setForeground(ColorInfo.instance.button_color);
+				dial_btn[i][n].setBackground(ColorInfo.instance.dial_button_color);
 				dial_btn[i][n].setFont(font);
 				dial_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				if (num < 10) {

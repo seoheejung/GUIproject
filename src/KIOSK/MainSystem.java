@@ -15,7 +15,7 @@ public class MainSystem {
 		int WIDTH = 555;
 		int HEIGHT = 995;
 
-		frame.setTitle("피터팬 스터디카페");
+		frame.setTitle("쉼표 스터디카페");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setVisible(true);
@@ -26,9 +26,9 @@ public class MainSystem {
 		FileManager.instance.loadData();
 		FileManager.instance.loadSeatData();
 
-		 frame.setContentPane(new Login_Panel());
+		// frame.setContentPane(new Login_Panel());
 		// frame.setContentPane(new Join_Panel());
-		// frame.setContentPane(new Seat_Panel("서희정", "01099374928"));
+		 frame.setContentPane(new Seat_Panel("서희정", "01099374928"));
 		// frame.setContentPane(new Select_Panel("서희정", "01099374928", 25));
 		// frame.setContentPane(new Payment_panel("서희정", "01099374928", 25, "10시간",11000));
 

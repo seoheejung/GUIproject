@@ -70,7 +70,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		summary_LB.setFont(font);
 		summary_LB.setForeground(Color.WHITE);
 		summary_LB.setOpaque(true);
-		summary_LB.setBackground(ColorInfo.instance.dial_button_color);
+		summary_LB.setBackground(ColorInfo.instance.title_font_color);
 		summary_LB.setVisible(true);
 		summary_LB.setBounds(50, 200, 120, 50);
 		add(summary_LB);
@@ -79,7 +79,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		payment_LB.setFont(font);
 		payment_LB.setForeground(Color.WHITE);
 		payment_LB.setOpaque(true);
-		payment_LB.setBackground(ColorInfo.instance.dial_button_color);
+		payment_LB.setBackground(ColorInfo.instance.title_font_color);
 		payment_LB.setVisible(true);
 		payment_LB.setBounds(50, 450, 120, 50);
 		add(payment_LB);
@@ -88,7 +88,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		seatNum_LB = new JLabel("· 선택 좌석 : " + seatNum + "번");
 		seatNum_LB.setFont(font);
 		seatNum_LB.setForeground(Color.BLACK);
-		seatNum_LB.setBackground(ColorInfo.instance.label_color);
+		seatNum_LB.setBackground(ColorInfo.instance.dial_button_color);
 		seatNum_LB.setOpaque(true);
 		seatNum_LB.setVisible(true);
 		seatNum_LB.setBounds(60, 260, 260, 40);
@@ -97,7 +97,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		useTime_LB = new JLabel("· 이용 시간 : " + useTime);
 		useTime_LB.setFont(font);
 		useTime_LB.setForeground(Color.BLACK);
-		useTime_LB.setBackground(ColorInfo.instance.label_color);
+		useTime_LB.setBackground(ColorInfo.instance.dial_button_color);
 		useTime_LB.setOpaque(true);
 		useTime_LB.setVisible(true);
 		useTime_LB.setBounds(60, 300, 360, 40);
@@ -106,7 +106,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		totalPrice_LB = new JLabel("· 결제할 금액 : " + price + "원");
 		totalPrice_LB.setFont(font);
 		totalPrice_LB.setForeground(Color.BLACK);
-		totalPrice_LB.setBackground(ColorInfo.instance.label_color);
+		totalPrice_LB.setBackground(ColorInfo.instance.dial_button_color);
 		totalPrice_LB.setOpaque(true);
 		totalPrice_LB.setVisible(true);
 		totalPrice_LB.setBounds(60, 340, 260, 40);
@@ -115,7 +115,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		startTime_LB = new JLabel("· 사용 시작 시간 : " + format.format(System.currentTimeMillis()));
 		startTime_LB.setFont(font);
 		startTime_LB.setForeground(Color.BLACK);
-		startTime_LB.setBackground(ColorInfo.instance.label_color);
+		startTime_LB.setBackground(ColorInfo.instance.dial_button_color);
 		startTime_LB.setOpaque(true);
 		startTime_LB.setVisible(true);
 		startTime_LB.setBounds(60, 380, 360, 40);
@@ -128,7 +128,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		font = new Font("나눔스퀘어", Font.PLAIN, 20);
 		cashPayment_btn = new JButton("현금결제");
 		cashPayment_btn.setForeground(ColorInfo.instance.button_color);
-		cashPayment_btn.setBackground(ColorInfo.instance.label_color);
+		cashPayment_btn.setBackground(ColorInfo.instance.dial_button_color);
 		cashPayment_btn.setFont(font);
 		cashPayment_btn.setBounds(50, 520, 120, 40);
 		cashPayment_btn.setVisible(true);
@@ -137,7 +137,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 		cardPayment_btn = new JButton("카드결제");
 		cardPayment_btn.setForeground(ColorInfo.instance.button_color);
-		cardPayment_btn.setBackground(ColorInfo.instance.label_color);
+		cardPayment_btn.setBackground(ColorInfo.instance.dial_button_color);
 		cardPayment_btn.setFont(font);
 		cardPayment_btn.setBounds(200, 520, 120, 40);
 		cardPayment_btn.setVisible(true);
@@ -153,7 +153,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		inputMoney_LB = new JLabel("· 투입한 금액  : ");
 		inputMoney_LB.setFont(font);
 		inputMoney_LB.setForeground(Color.BLACK);
-		inputMoney_LB.setBackground(ColorInfo.instance.label_color);
+		inputMoney_LB.setBackground(ColorInfo.instance.dial_button_color);
 		inputMoney_LB.setOpaque(true);
 		inputMoney_LB.setVisible(true);
 		inputMoney_LB.setBounds(60, 590, 130, 40);
@@ -162,8 +162,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 		font = new Font("나눔스퀘어", Font.PLAIN, 18);
 		inputMoney_tf = new JTextField(inputMoney + "");
 		inputMoney_tf.setBounds(200, 590, 120, 40);
-		inputMoney_tf.setBackground(new Color(235, 255, 230));
-		inputMoney_tf.setForeground(Color.BLACK);
+		inputMoney_tf.setBackground(ColorInfo.instance.textField_bg_color);
+		inputMoney_tf.setForeground(ColorInfo.instance.textField_font_color);
 		inputMoney_tf.setFont(font);
 		add(inputMoney_tf);
 
@@ -171,8 +171,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 		font = new Font("나눔스퀘어", Font.PLAIN, 24);
 		payment_btn = new JButton("결제");
-		payment_btn.setForeground(ColorInfo.instance.label_color);
 		payment_btn.setBackground(ColorInfo.instance.button_color);
+		payment_btn.setForeground(Color.WHITE);
 		payment_btn.setFont(font);
 		payment_btn.setBounds(280, 840, 100, 50);
 		payment_btn.setVisible(true);
@@ -180,8 +180,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 		add(payment_btn);
 
 		cancel_btn = new JButton("취소");
-		cancel_btn.setForeground(Color.gray);
-		cancel_btn.setBackground(ColorInfo.instance.label_color);
+		cancel_btn.setBackground(ColorInfo.instance.button_sub_color);
+		cancel_btn.setForeground(Color.BLACK);
 		cancel_btn.setFont(font);
 		cancel_btn.setBounds(400, 840, 100, 50);
 		cancel_btn.setVisible(true);
@@ -194,7 +194,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		money_Btn = new JButton[4];
 		for (int i = 0; i < money_Btn.length; i++) {
 			money_Btn[i] = new JButton(arMoneyKind[i] + "");
-			money_Btn[i].setBackground(new Color(210, 210, 210));
+			money_Btn[i].setBackground(ColorInfo.instance.disabled_button_color);
 			money_Btn[i].setForeground(Color.WHITE);
 			money_Btn[i].setFont(font);
 			money_Btn[i].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -263,9 +263,9 @@ public class Payment_panel extends JPanel implements ActionListener {
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("나눔스퀘어", Font.BOLD, 22);
+		font = new Font("나눔스퀘어", Font.PLAIN, 22);
 		seat_btn = new JButton("좌석화면");
-		seat_btn.setBackground(ColorInfo.instance.label_color);
+		seat_btn.setBackground(ColorInfo.instance.button_sub_color);
 		seat_btn.setForeground(Color.black);
 		seat_btn.setFont(font);
 		seat_btn.setBounds(240, 70, 120, 60);
@@ -273,7 +273,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		add(seat_btn);
 
 		login_btn = new JButton("처음으로");
-		login_btn.setBackground(ColorInfo.instance.label_color);
+		login_btn.setBackground(ColorInfo.instance.button_sub_color);
 		login_btn.setForeground(Color.black);
 		login_btn.setFont(font);
 		login_btn.setBounds(380, 70, 120, 60);

@@ -32,11 +32,11 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		setLayout(null); // 배치관리자 설정 x
 		info(name, mobile);
 
-		font = new Font("나눔스퀘어", Font.BOLD, 22);
+		font = new Font("나눔스퀘어", Font.PLAIN, 24);
 		JLabel seat_LB = new JLabel("좌석 이용 현황 : " + seatUseState());
 		seat_LB.setFont(font);
 		seat_LB.setForeground(Color.black);
-		seat_LB.setBounds(50, 200, 240, 50);
+		seat_LB.setBounds(50, 200, 240, 40);
 		add(seat_LB);
 
 		seatButtonSet();
@@ -58,14 +58,14 @@ public class Seat_Panel extends JPanel implements ActionListener {
 	void seatButtonSet() {
 		seat_btn = new JButton[4][7];
 		int num = 1;
-		font = new Font("나눔스퀘어", Font.BOLD, 17);
+		font = new Font("나눔스퀘어", Font.BOLD, 18);
 		for (int i = 0; i < seat_btn.length; i++) {
 			for (int n = 0; n < seat_btn[i].length; n++) {
 				seat_btn[i][n] = new JButton();
 				seat_btn[i][n].setText(num + "");
 				seat_btn[i][n].setFont(font);
 				seat_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-				seat_btn[i][n].setBackground(Color.lightGray);
+				seat_btn[i][n].setBackground(ColorInfo.instance.disabled_button_color);
 				if (FileManager.instance.seatManager.get(num - 1).isSeatUse()) {
 					seat_btn[i][n].setBackground(Color.black);
 				}
@@ -99,9 +99,9 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("나눔스퀘어", Font.BOLD, 22);
+		font = new Font("나눔스퀘어", Font.PLAIN, 22);
 		update_btn = new JButton("정보수정");
-		update_btn.setBackground(ColorInfo.instance.label_color);
+		update_btn.setBackground(ColorInfo.instance.button_sub_color);
 		update_btn.setForeground(Color.black);
 		update_btn.setFont(font);
 		update_btn.setBounds(240, 70, 120, 60);
@@ -109,7 +109,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		add(update_btn);
 
 		back_btn = new JButton("뒤로가기");
-		back_btn.setBackground(ColorInfo.instance.label_color);
+		back_btn.setBackground(ColorInfo.instance.button_sub_color);
 		back_btn.setForeground(Color.black);
 		back_btn.setFont(font);
 		back_btn.setBounds(380, 70, 120, 60);
