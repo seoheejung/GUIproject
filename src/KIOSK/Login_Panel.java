@@ -19,14 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Login_Panel extends JPanel implements ActionListener {
-	JButton checkOut_btn; // Åğ½ÇÇÏ±â ¹öÆ°
-	JButton login_btn; // ·Î±×ÀÎ ¹öÆ°
-	JButton join_btn; // È¸¿ø°¡ÀÔ ¹öÆ°
+	JButton checkOut_btn; // í‡´ì‹¤í•˜ê¸° ë²„íŠ¼
+	JButton login_btn; // ë¡œê·¸ì¸ ë²„íŠ¼
+	JButton join_btn; // íšŒì›ê°€ì… ë²„íŠ¼
 
-	JButton[][] dial_btn; // ´ÙÀÌ¾ó ¹øÈ£ ¹öÆ° ¹è¿­
+	JButton[][] dial_btn; // ë‹¤ì´ì–¼ ë²ˆí˜¸ ë²„íŠ¼ ë°°ì—´
 
-	JTextField mobile_tf; // ÇÚµåÆù¹øÈ£ ÀÔ·ÂÃ¢
-	JTextField pw_tf; // ÆĞ½º¿öµå ÀÔ·ÂÃ¢
+	JTextField mobile_tf; // í•¸ë“œí°ë²ˆí˜¸ ì…ë ¥ì°½
+	JTextField pw_tf; // íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ì°½
 
 	String mobile = "010";
 	String pw = "";
@@ -38,7 +38,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 	Image img = new ImageIcon("./src/Image/main.jpg").getImage();
 
 	public Login_Panel() {
-		setLayout(null); // ¹èÄ¡°ü¸®ÀÚ ¼³Á¤ x
+		setLayout(null); // ë°°ì¹˜ê´€ë¦¬ì ì„¤ì • x
 
 		buttonSet();
 		textFieldSet();
@@ -52,9 +52,9 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void buttonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 25);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 25);
 
-		login_btn = new JButton("·Î±×ÀÎ");
+		login_btn = new JButton("ë¡œê·¸ì¸");
 		login_btn.setBackground(Color.WHITE);
 		login_btn.setForeground(ColorInfo.instance.button_color);
 		login_btn.setFont(font);
@@ -62,9 +62,9 @@ public class Login_Panel extends JPanel implements ActionListener {
 		login_btn.addActionListener(this);
 		add(login_btn);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 16);
 
-		join_btn = new JButton("È¸¿ø°¡ÀÔ");
+		join_btn = new JButton("íšŒì›ê°€ì…");
 		join_btn.setBackground(ColorInfo.instance.button_color);
 		join_btn.setForeground(Color.WHITE);
 		join_btn.setFont(font);
@@ -72,7 +72,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		join_btn.addActionListener(this);
 		add(join_btn);
 
-		checkOut_btn = new JButton("Åğ½ÇÇÏ±â");
+		checkOut_btn = new JButton("í‡´ì‹¤í•˜ê¸°");
 		checkOut_btn.setBackground(ColorInfo.instance.button_color);
 		checkOut_btn.setForeground(Color.WHITE);
 		checkOut_btn.setFont(font);
@@ -82,7 +82,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void dialButtonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 28);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 28);
 		dial_btn = new JButton[4][3];
 		int num = 1;
 		for (int i = 0; i < dial_btn.length; i++) {
@@ -91,7 +91,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 				dial_btn[i][n].setBackground(ColorInfo.instance.dial_button_color);
 				dial_btn[i][n].setForeground(Color.WHITE);
 				dial_btn[i][n].setFont(font);
-				dial_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
+				dial_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				if (num < 10) {
 					dial_btn[i][n].setText(num + "");
 				} else if (num == 10) {
@@ -115,17 +115,22 @@ public class Login_Panel extends JPanel implements ActionListener {
 			for (int n = 0; n < dial_btn[i].length; n++) {
 				if (e.getSource() == dial_btn[i][n]) {
 					if (position == 1) {
-						if (mobile.length() > 0 && dial_btn[i][n].getText().equals("DEL")) {
-							mobile = mobile.substring(0, mobile.length() - 1);
+						if (dial_btn[i][n].getText().equals("DEL")) {
+							if (mobile.length() > 0)
+								mobile = mobile.substring(0, mobile.length() - 1);
 						} else if (dial_btn[i][n].getText().equals("CLE")) {
 							mobile = "";
 						} else {
 							mobile += dial_btn[i][n].getText();
+							if (mobile.length() > 10) {
+								position = 2;
+							}
 						}
 						mobile_tf.setText(mobile);
 					} else if (position == 2) {
-						if (pw.length() > 0 && dial_btn[i][n].getText().equals("DEL")) {
-							pw = mobile.substring(0, pw.length() - 1);
+						if (dial_btn[i][n].getText().equals("DEL")) {
+							if (pw.length() > 0)
+								pw = pw.substring(0, pw.length() - 1);
 						} else if (dial_btn[i][n].getText().equals("CLE")) {
 							pw = "";
 						} else {
@@ -140,7 +145,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 	}
 
 	void textFieldSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 16);
 
 		mobile_tf = new JTextField(15);
 		mobile_tf.setText("010");
@@ -176,7 +181,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		});
 
 		pw_tf = new JTextField(5);
-		pw_tf.setText("ºñ¹Ğ¹øÈ£ ÀÔ·Â");
+		pw_tf.setText("ë¹„ë°€ë²ˆí˜¸ ì…ë ¥");
 		pw_tf.setBounds(135, 330, 270, 40);
 		pw_tf.setBackground(ColorInfo.instance.textField_color);
 		pw_tf.setForeground(Color.WHITE);
@@ -187,7 +192,7 @@ public class Login_Panel extends JPanel implements ActionListener {
 		pw_tf.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (pw_tf.getText().equals("ºñ¹Ğ¹øÈ£ ÀÔ·Â"))
+				if (pw_tf.getText().equals("ë¹„ë°€ë²ˆí˜¸ ì…ë ¥"))
 					pw_tf.setText("");
 				position = 2;
 				repaint();
@@ -222,27 +227,27 @@ public class Login_Panel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		dialButtonPress(e);
 
-		// ·Î±×ÀÎ ¹öÆ°À» ´­·¶À» ¶§
+		// ë¡œê·¸ì¸ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		if (e.getSource() == login_btn) {
 			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
 			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "Á¸ÀçÇÏÁö ¾Ê´Â ¹øÈ£ÀÔ´Ï´Ù.", "Message", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤.", "Message", JOptionPane.WARNING_MESSAGE);
 			} else {
 				MainSystem.frame.setContentPane(new Seat_Panel(log, mobile_tf.getText()));
 				MainSystem.frame.revalidate();
 			}
-			// È¸¿ø°¡ÀÔ ¹öÆ°À» ´­·¶À» ¶§
+			// íšŒì›ê°€ì… ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		} else if (e.getSource() == join_btn) {
 			MainSystem.frame.setContentPane(new Join_Panel());
 			MainSystem.frame.revalidate();
-			// Åğ½ÇÇÏ±â ¹öÆ°À» ´­·¶À» ¶§
+			// í‡´ì‹¤í•˜ê¸° ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		} else if (e.getSource() == checkOut_btn) {
 			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
 			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "Á¸ÀçÇÏÁö ¾Ê´Â ¹øÈ£ÀÔ´Ï´Ù.", "Message", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤.", "Message", JOptionPane.WARNING_MESSAGE);
 			} else {
 				if (FileManager.instance.checkOut(mobile_tf.getText())) {
-					JOptionPane.showMessageDialog(null, "Åğ½ÇÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "Message", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "í‡´ì‹¤ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.INFORMATION_MESSAGE);
 					MainSystem.frame.setContentPane(new Login_Panel());
 					MainSystem.frame.revalidate();
 				}

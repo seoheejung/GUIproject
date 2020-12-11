@@ -9,28 +9,29 @@ public class MainSystem {
 	public static JFrame frame = new JFrame();
 
 	public static void main(String[] args) {
-		
-		// ---½ÃÀÛ À§Ä¡¸¦ ¹ÙÅÁÈ­¸éÀÇ Áß¾ÓÀ¸·Î ¹Ù²Ù´Â ÄÚµå---
+
+		// ---ì‹œì‘ ìœ„ì¹˜ë¥¼ ë°”íƒ•í™”ë©´ì˜ ì¤‘ì•™ìœ¼ë¡œ ë°”ê¾¸ëŠ” ì½”ë“œ---
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int WIDTH = 555;
-		int HEIGHT = 1000;
+		int HEIGHT = 995;
 
-		frame.setTitle("ÇÇÅÍÆÒ ½ºÅÍµğÄ«Æä");
+		frame.setTitle("í”¼í„°íŒ¬ ìŠ¤í„°ë””ì¹´í˜");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setVisible(true);
 
-		frame.setLocation(screenSize.width / 2 - WIDTH / 2, screenSize.height - 1050);
+		frame.setLocation((int) screenSize.getWidth() / 2 - WIDTH / 2, (int) screenSize.getHeight() - 1050);
 
-		// ¸Ş¸ğÀå ÆÄÀÏÀÌ Á¸ÀçÇÏ¸é, ÆÄÀÏ ºÒ·¯¿À±â
+		// ë©”ëª¨ì¥ íŒŒì¼ì´ ì¡´ì¬í•˜ë©´, íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
 		FileManager.instance.loadData();
 		FileManager.instance.loadSeatData();
 
-		// frame.setContentPane(new Login_Panel());
+		 frame.setContentPane(new Login_Panel());
 		// frame.setContentPane(new Join_Panel());
-		// frame.setContentPane(new Seat_Panel("¼­ÈñÁ¤", "01099374928"));
-		 // frame.setContentPane(new Select_Panel("¼­ÈñÁ¤", "01099374928", 25));
-		frame.setContentPane(new Payment_panel("¼­ÈñÁ¤", "01099374928", 25, "10½Ã°£", 11000));
+		// frame.setContentPane(new Seat_Panel("ì„œí¬ì •", "01099374928"));
+		// frame.setContentPane(new Select_Panel("ì„œí¬ì •", "01099374928", 25));
+		// frame.setContentPane(new Payment_panel("ì„œí¬ì •", "01099374928", 25, "10ì‹œê°„",11000));
+
 		frame.revalidate();
 
 	}

@@ -20,12 +20,12 @@ public class KeyBoard_btn_Setting implements ActionListener {
 	JButton[] fourthLine_btn = new JButton[8];
 	
 	String [] firstLine_btn_Text = {"1","2","3","4","5","6","7","8","9","0"};
-	String [] secondLine_btn_Text = {"¤²","¤¸","¤§","¤¡","¤µ","¤Ë","¤Å","¤Á","¤À","¤Ä"};
-	String [] thirdLine_btn_Text = {"¤±","¤¤","¤·","¤©","¤¾","¤Ç","¤Ã","¤¿","¤Ó"};
-	String [] fourthLine_btn_Text = {"¤»","¤¼","¤º","¤½","¤Ğ","¤Ì","¤Ñ","¢·"};
+	String [] secondLine_btn_Text = {"ã…‚","ã…ˆ","ã„·","ã„±","ã……","ã…›","ã…•","ã…‘","ã…","ã…”"};
+	String [] thirdLine_btn_Text = {"ã…","ã„´","ã…‡","ã„¹","ã…","ã…—","ã…“","ã…","ã…£"};
+	String [] fourthLine_btn_Text = {"ã…‹","ã…Œ","ã…Š","ã…","ã… ","ã…œ","ã…¡","â—"};
 	
 	public KeyBoard_btn_Setting() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 22);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 22);
 		for (int i = 0; i < firstLine_btn.length; i++) {
 			firstLine_btn[i] = new JButton();
 			firstLine_btn[i].setFont(font);

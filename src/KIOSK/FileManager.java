@@ -12,17 +12,17 @@ import javax.swing.JOptionPane;
 
 public class FileManager {
 
-	File file = null; // ÆÄÀÏ Á¸Àç Ã¼Å©¿©ºÎ
-	FileWriter fout = null; // ¾²±â
-	FileReader reader = null; // ÀĞ±â
-	BufferedReader br = null; // ÇÑÁÙ¾¿ ÀĞ±â
+	File file = null; // íŒŒì¼ ì¡´ì¬ ì²´í¬ì—¬ë¶€
+	FileWriter fout = null; // ì“°ê¸°
+	FileReader reader = null; // ì½ê¸°
+	BufferedReader br = null; // í•œì¤„ì”© ì½ê¸°
 
-	final String USER_PATH = "userdata.txt"; // È¸¿øÁ¤º¸ ÆÄÀÏ °æ·Î
-	final String SEAT_PATH = "seatdata.txt"; // È¸¿øÁ¤º¸ ÆÄÀÏ °æ·Î
+	final String USER_PATH = "userdata.txt"; // íšŒì›ì •ë³´ íŒŒì¼ ê²½ë¡œ
+	final String SEAT_PATH = "seatdata.txt"; // íšŒì›ì •ë³´ íŒŒì¼ ê²½ë¡œ
 
 	String userData;
 	String seatData;
-	boolean isLoad = false; // ÆÄÀÏ ºÒ·¯¿À±â ¼º°ø¿©ºÎ Ã¼Å©
+	boolean isLoad = false; // íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸° ì„±ê³µì—¬ë¶€ ì²´í¬
 
 	static int LOG = -1;
 
@@ -31,7 +31,7 @@ public class FileManager {
 	
 	Calendar cal = Calendar.getInstance();
 
-	// ½Ì±ÛÅæ ÆĞÅÏ
+	// ì‹±ê¸€í†¤ íŒ¨í„´
 	public static FileManager instance = new FileManager();
 
 	public static FileManager getInstance() {
@@ -43,7 +43,7 @@ public class FileManager {
 		seatManager = new ArrayList<>();
 	}
 
-	// È¸¿ø Ãß°¡
+	// íšŒì› ì¶”ê°€
 	public void addUser(UserInfo user) {
 		userManager.add(user);
 		addData(user);
@@ -56,7 +56,7 @@ public class FileManager {
 		saveUserData();
 	}
 
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	String login(String mobile, String pw) {
 		String check_id = "";
 		for (int i = 0; i < userManager.size(); i++) {
@@ -69,12 +69,12 @@ public class FileManager {
 		return check_id;
 	}
 
-	// Åğ½ÇÇÏ±â
+	// í‡´ì‹¤í•˜ê¸°
 	boolean checkOut(String mobile) {
 		for (int i = 0; i < userManager.size(); i++) {
 			if (mobile.equals(userManager.get(i).getMobile())) {
 				if (!userManager.get(i).seatUse) {
-					JOptionPane.showMessageDialog(null, "ÀÌ¿ëÁßÀÎ ÁÂ¼®ÀÌ ¾ø½À´Ï´Ù.", "Message", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ì´ìš©ì¤‘ì¸ ì¢Œì„ì´ ì—†ìŠµë‹ˆë‹¤.", "Message", JOptionPane.WARNING_MESSAGE);
 					break;
 				}
 				for (int j = 0; j < seatManager.size(); j++) {
@@ -98,7 +98,7 @@ public class FileManager {
 		return false;
 	}
 
-	// ÀÔ½ÇÇÏ±â
+	// ì…ì‹¤í•˜ê¸°
 	void checkIn(String mobile, String useTime, int seatNum) {
 		for (int i = 0; i < userManager.size(); i++) {
 			if (mobile.equals(userManager.get(i).getMobile())) {
@@ -108,7 +108,7 @@ public class FileManager {
 				userManager.get(i).seatUse = true;
 				updateUser(i, userManager.get(i));
 			} else {
-				JOptionPane.showMessageDialog(null, "ºñÁ¤»óÀûÀÎ Á¢±ÙÀÔ´Ï´Ù.", "Message", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ë¹„ì •ìƒì ì¸ ì ‘ê·¼ì…ë‹ˆë‹¤.", "Message", JOptionPane.WARNING_MESSAGE);
 				System.exit(0);
 			}
 		}
@@ -119,7 +119,7 @@ public class FileManager {
 				saveSeatData();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "¿µ¼öÁõÀÌ Ãâ·ÂµÇ¾ú½À´Ï´Ù.", "Message", JOptionPane.PLAIN_MESSAGE );
+		JOptionPane.showMessageDialog(null, "ì˜ìˆ˜ì¦ì´ ì¶œë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.PLAIN_MESSAGE );
 		MainSystem.frame.setContentPane(new Login_Panel());
 		MainSystem.frame.revalidate();
 	}
@@ -139,7 +139,7 @@ public class FileManager {
 	}
 
 	private void addData(UserInfo user) {
-		// Ãß°¡µÈ È¸¿ø Á¤º¸ ÀúÀå
+		// ì¶”ê°€ëœ íšŒì› ì •ë³´ ì €ì¥
 		int lastIndex = userManager.size() - 1;
 		UserInfo temp = userManager.get(lastIndex);
 		userData += temp.getName() + "/";
@@ -176,7 +176,7 @@ public class FileManager {
 		userManager.add(temp);
 	}
 
-	// ÆÄÀÏ ºÒ·¯¿À±â (»ç¿ëÀÚ Á¤º¸)
+	// íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸° (ì‚¬ìš©ì ì •ë³´)
 	void loadData() {
 		file = new File(USER_PATH);
 		isLoad = false;
@@ -207,7 +207,7 @@ public class FileManager {
 		br = null;
 	}
 
-	// ÆÄÀÏ ÀúÀåÇÏ±â (ÁÂ¼®)
+	// íŒŒì¼ ì €ì¥í•˜ê¸° (ì¢Œì„)
 	public void saveSeatData() {
 		String info = "";
 		for (int i = 0; i < seatManager.size(); i++) {
@@ -236,7 +236,7 @@ public class FileManager {
 		seatManager.add(temp);
 	}
 
-	// ÆÄÀÏ ºÒ·¯¿À±â (ÁÂ¼®)
+	// íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸° (ì¢Œì„)
 	void loadSeatData() {
 		file = new File(SEAT_PATH);
 		isLoad = false;

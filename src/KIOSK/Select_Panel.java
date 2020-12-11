@@ -25,9 +25,9 @@ public class Select_Panel extends JPanel implements ActionListener {
 
 	Image img = new ImageIcon("./src/Image/purchase.jpg").getImage();
 
-	JButton login_btn; // Ã³À½À¸·Î ¹öÆ°
-	JButton seat_btn; // ÁÂ¼®È­¸é ¹öÆ°
-	JButton next_btn; // ´ÙÀ½ ¹öÆ°
+	JButton login_btn; // ì²˜ìŒìœ¼ë¡œ ë²„íŠ¼
+	JButton seat_btn; // ì¢Œì„í™”ë©´ ë²„íŠ¼
+	JButton next_btn; // ë‹¤ìŒ ë²„íŠ¼
 
 	JLabel goods_LB;
 	JLabel hour_LB;
@@ -37,32 +37,31 @@ public class Select_Panel extends JPanel implements ActionListener {
 	JLabel useTime_LB;
 	JLabel totalPrice_LB;
 
-	JRadioButton fixedTicket_rd; // Á¤¾×±Ç ¶óµğ¿À¹öÆ°
-	JRadioButton hourTicket_rd; // ½Ã°£±Ç ¶óµğ¿À¹öÆ°
-	ButtonGroup Ticket_gp; // ¶óµğ¿À¹öÆ° ±×·ì
+	JRadioButton fixedTicket_rd; // ì •ì•¡ê¶Œ ë¼ë””ì˜¤ë²„íŠ¼
+	JRadioButton hourTicket_rd; // ì‹œê°„ê¶Œ ë¼ë””ì˜¤ë²„íŠ¼
+	ButtonGroup Ticket_gp; // ë¼ë””ì˜¤ë²„íŠ¼ ê·¸ë£¹
 
-	JRadioButton[] fixed_rd; // Á¤¾×±Ç Á¾·ù ¶óµğ¿À ¹öÆ°
-	JRadioButton[] hour_rd; // ½Ã°£±Ç Á¾·ù ¶óµğ¿À ¹öÆ°
+	JRadioButton[] fixed_rd; // ì •ì•¡ê¶Œ ì¢…ë¥˜ ë¼ë””ì˜¤ ë²„íŠ¼
+	JRadioButton[] hour_rd; // ì‹œê°„ê¶Œ ì¢…ë¥˜ ë¼ë””ì˜¤ ë²„íŠ¼
 
 	public Select_Panel(String name, String mobile, int seatNum) {
 		this.name = name;
 		this.mobile = mobile;
 		this.seatNum = seatNum;
 
-		setLayout(null); // ¹èÄ¡°ü¸®ÀÚ ¼³Á¤ x
+		setLayout(null); // ë°°ì¹˜ê´€ë¦¬ì ì„¤ì • x
 		info(name, mobile);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 28);
-		goods_LB = new JLabel(" [1] »óÇ° ¼±ÅÃ");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 24);
+		goods_LB = new JLabel(" [1] ìƒí’ˆ ì„ íƒ");
 		goods_LB.setFont(font);
 		goods_LB.setForeground(Color.WHITE);
 		goods_LB.setOpaque(true);
 		goods_LB.setBackground(ColorInfo.instance.dial_button_color);
-
 		goods_LB.setBounds(50, 200, 170, 50);
 		add(goods_LB);
 
-		hour_LB = new JLabel(" [2] ½Ã°£ ¼±ÅÃ");
+		hour_LB = new JLabel(" [2] ì‹œê°„ ì„ íƒ");
 		hour_LB.setFont(font);
 		hour_LB.setForeground(Color.WHITE);
 		hour_LB.setOpaque(true);
@@ -71,7 +70,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		hour_LB.setVisible(false);
 		add(hour_LB);
 
-		summary_LB = new JLabel(" [3] ³»¿ª È®ÀÎ");
+		summary_LB = new JLabel(" [3] ë‚´ì—­ í™•ì¸");
 		summary_LB.setFont(font);
 		summary_LB.setForeground(Color.WHITE);
 		summary_LB.setOpaque(true);
@@ -89,16 +88,16 @@ public class Select_Panel extends JPanel implements ActionListener {
 	}
 
 	void goods_radioButtonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 22);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 22);
 
 		Ticket_gp = new ButtonGroup();
-		hourTicket_rd = new JRadioButton(" ½Ã°£±Ç");
+		hourTicket_rd = new JRadioButton(" ì‹œê°„ê¶Œ");
 		hourTicket_rd.setBounds(80, 260, 240, 40);
 		hourTicket_rd.setFont(font);
 		hourTicket_rd.setBackground(new Color(255, 252, 248));
 		hourTicket_rd.addActionListener(this);
 
-		fixedTicket_rd = new JRadioButton(" Á¤¾×±Ç");
+		fixedTicket_rd = new JRadioButton(" ì •ì•¡ê¶Œ");
 		fixedTicket_rd.setBounds(80, 300, 240, 40);
 		fixedTicket_rd.setFont(font);
 		fixedTicket_rd.setBackground(new Color(255, 252, 248));
@@ -113,12 +112,12 @@ public class Select_Panel extends JPanel implements ActionListener {
 	}
 
 	void hour_radioButtonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
 		hour_rd = new JRadioButton[6];
 
 		ButtonGroup hourTicket_gp = new ButtonGroup();
 		for (int i = 0; i < hour_rd.length; i++) {
-			hour_rd[i] = new JRadioButton(" " + (i + 1) * 2 + "½Ã°£");
+			hour_rd[i] = new JRadioButton(" " + (i + 1) * 2 + "ì‹œê°„");
 			hour_rd[i].setBounds(80, 420 + i * 40, 240, 40);
 			hour_rd[i].setFont(font);
 			hour_rd[i].setBackground(new Color(255, 252, 248));
@@ -130,12 +129,12 @@ public class Select_Panel extends JPanel implements ActionListener {
 	}
 
 	void fixed_radioButtonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
 		fixed_rd = new JRadioButton[2];
 
 		ButtonGroup fixedTicket_gp = new ButtonGroup();
 		for (int i = 0; i < fixed_rd.length; i++) {
-			fixed_rd[i] = new JRadioButton(" " + (i + 1) * 50 + "½Ã°£");
+			fixed_rd[i] = new JRadioButton(" " + (i + 1) * 50 + "ì‹œê°„");
 			fixed_rd[i].setBounds(80, 420 + i * 40, 240, 40);
 			fixed_rd[i].setFont(font);
 			fixed_rd[i].setBackground(new Color(255, 252, 248));
@@ -163,7 +162,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		String temp = "";
 		if (!text.equals("")) {
 			for (int i = 0; i < text.length(); i++) {
-				if (text.charAt(i) == '½Ã') {
+				if (text.charAt(i) == 'ì‹œ') {
 					break;
 				}
 				temp += text.charAt(i);
@@ -174,7 +173,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 			} else if (fixedTicket_rd.isSelected()) {
 				price = Integer.parseInt(temp) * 1000 + 10000;
 			}
-				
+
 		}
 		return price;
 	}
@@ -183,8 +182,8 @@ public class Select_Panel extends JPanel implements ActionListener {
 
 		summary_LB.setVisible(true);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
-		seatNum_LB = new JLabel("¡¤ ÀÌ¿ëÁÂ¼®          " + seatNum + "¹ø");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
+		seatNum_LB = new JLabel("Â· ì´ìš©ì¢Œì„          " + seatNum + "ë²ˆ");
 		seatNum_LB.setFont(font);
 		seatNum_LB.setForeground(Color.BLACK);
 		seatNum_LB.setBackground(ColorInfo.instance.label_color);
@@ -193,7 +192,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		seatNum_LB.setBounds(70, 740, 240, 40);
 		add(seatNum_LB);
 
-		useTime_LB = new JLabel("¡¤ ÀÌ¿ë½Ã°£         " + useTime);
+		useTime_LB = new JLabel("Â· ì´ìš©ì‹œê°„         " + useTime);
 		useTime_LB.setFont(font);
 		useTime_LB.setForeground(Color.BLACK);
 		useTime_LB.setBackground(ColorInfo.instance.label_color);
@@ -202,7 +201,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		useTime_LB.setBounds(70, 780, 240, 40);
 		add(useTime_LB);
 
-		totalPrice_LB = new JLabel("¡¤ °áÁ¦±İ¾×          " + priceReturn(useTime) + "¿ø");
+		totalPrice_LB = new JLabel("Â· ê²°ì œê¸ˆì•¡          " + priceReturn(useTime) + "ì›");
 		totalPrice_LB.setFont(font);
 		totalPrice_LB.setForeground(Color.BLACK);
 		totalPrice_LB.setBackground(ColorInfo.instance.label_color);
@@ -211,8 +210,8 @@ public class Select_Panel extends JPanel implements ActionListener {
 		totalPrice_LB.setBounds(70, 820, 240, 40);
 		add(totalPrice_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 24);
-		next_btn = new JButton("´ÙÀ½");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 24);
+		next_btn = new JButton("ë‹¤ìŒ");
 		next_btn.setForeground(Color.gray);
 		next_btn.setBackground(ColorInfo.instance.label_color);
 		next_btn.setFont(font);
@@ -231,23 +230,23 @@ public class Select_Panel extends JPanel implements ActionListener {
 	}
 
 	void info(String name, String mobile) {
-		// Á¤º¸ ·¹ÀÌºí
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 40);
+		// ì •ë³´ ë ˆì´ë¸”
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 40);
 		JLabel name_LB = new JLabel(name);
 		name_LB.setFont(font);
 		name_LB.setForeground(Color.white);
 		name_LB.setBounds(40, 60, 120, 40);
 		add(name_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 16);
 		JLabel mobile_LB = new JLabel("HP." + mobile);
 		mobile_LB.setFont(font);
 		mobile_LB.setForeground(Color.white);
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 22);
-		seat_btn = new JButton("ÁÂ¼®È­¸é");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 22);
+		seat_btn = new JButton("ì¢Œì„í™”ë©´");
 		seat_btn.setBackground(ColorInfo.instance.label_color);
 		seat_btn.setForeground(Color.black);
 		seat_btn.setFont(font);
@@ -255,7 +254,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 		seat_btn.addActionListener(this);
 		add(seat_btn);
 
-		login_btn = new JButton("Ã³À½À¸·Î");
+		login_btn = new JButton("ì²˜ìŒìœ¼ë¡œ");
 		login_btn.setBackground(ColorInfo.instance.label_color);
 		login_btn.setForeground(Color.black);
 		login_btn.setFont(font);

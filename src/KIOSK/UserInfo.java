@@ -2,15 +2,15 @@ package KIOSK;
 
 import java.util.Calendar;
 
-// È¸¿ø Å¬·¡½º
+// íšŒì› í´ë˜ìŠ¤
 public class UserInfo {
 	private String name;
 	private String mobile;
 	private String pw;
-	private int seatNum; // ÀÚ¸® ¹øÈ£
-	private long maxTime; // »ç¿ë °¡´ÉÇÑ ÃÑ ½Ã°£
-	private long preTime; // »ç¿ë ½ÃÀÛÇÑ ½Ã°£
-	boolean seatUse = false; // ÀÚ¸®¸¦ »ç¿ëÇÏ´ÂÁö ¿©ºÎ
+	private int seatNum; // ìë¦¬ ë²ˆí˜¸
+	private long maxTime; // ì‚¬ìš© ê°€ëŠ¥í•œ ì´ ì‹œê°„
+	private long preTime; // ì‚¬ìš© ì‹œì‘í•œ ì‹œê°„
+	boolean seatUse = false; // ìë¦¬ë¥¼ ì‚¬ìš©í•˜ëŠ”ì§€ ì—¬ë¶€
 
 	public String getName() {
 		return name;
@@ -49,7 +49,7 @@ public class UserInfo {
 	}
 
 	public void setMaxTime(long maxTime) {
-		
+
 		this.maxTime = maxTime;
 	}
 
@@ -59,13 +59,13 @@ public class UserInfo {
 
 	public void setPreTime(long preTime) {
 		int hour = FileManager.instance.cal.get(Calendar.HOUR_OF_DAY);
-		
-		if(preTime == 0) {
+
+		if (preTime == 0) {
 			this.preTime = preTime;
-		}else {
+		} else {
 			this.preTime = hour;
 		}
-		
+
 	}
 
 }

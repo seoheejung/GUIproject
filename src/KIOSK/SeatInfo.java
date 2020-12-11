@@ -2,20 +2,22 @@ package KIOSK;
 
 public class SeatInfo {
 	private int seatNum = 0;
-	private boolean seatUse = false; // ÀÚ¸®¸¦ »ç¿ëÇÏ´ÂÁö ¿©ºÎ
-	
+	private boolean seatUse = false; // ìë¦¬ë¥¼ ì‚¬ìš©í•˜ëŠ”ì§€ ì—¬ë¶€
+
 	public int getSeatNum() {
 		return seatNum;
 	}
+
 	public void setSeatNum(int seatNum) {
 		this.seatNum = seatNum;
 	}
+
 	public boolean isSeatUse() {
 		return seatUse;
 	}
+
 	public void setSeatUse(boolean seatUse) {
 		this.seatUse = seatUse;
 	}
-	
 
 }

@@ -41,20 +41,20 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 	Image img = new ImageIcon("./src/Image/purchase.jpg").getImage();
 
-	JButton login_btn; // Ã³À½À¸·Î ¹öÆ°
-	JButton seat_btn; // ÁÂ¼®È­¸é ¹öÆ°
-	JButton payment_btn; // °áÁ¦ÇÏ±â ¹öÆ°
-	JButton cancel_btn; // Ãë¼Ò ¹öÆ°
+	JButton login_btn; // ì²˜ìŒìœ¼ë¡œ ë²„íŠ¼
+	JButton seat_btn; // ì¢Œì„í™”ë©´ ë²„íŠ¼
+	JButton payment_btn; // ê²°ì œí•˜ê¸° ë²„íŠ¼
+	JButton cancel_btn; // ì·¨ì†Œ ë²„íŠ¼
 
-	JButton cashPayment_btn; // Çö±İ°áÁ¦ ¹öÆ°
-	JButton cardPayment_btn; // Ä«µå °áÁ¦ ¹öÆ°
+	JButton cashPayment_btn; // í˜„ê¸ˆê²°ì œ ë²„íŠ¼
+	JButton cardPayment_btn; // ì¹´ë“œ ê²°ì œ ë²„íŠ¼
 
-	JTextField inputMoney_tf; // ÅõÀÔÇÒ ±İ¾× ÀÔ·ÂÃ¢
+	JTextField inputMoney_tf; // íˆ¬ì…í•  ê¸ˆì•¡ ì…ë ¥ì°½
 	JButton[] money_Btn;
-	int[] arMoneyKind = { 50000, 10000, 5000, 1000 }; // È­Æó Á¾·ùº° ´ÜÀ§
+	int[] arMoneyKind = { 50000, 10000, 5000, 1000 }; // í™”í ì¢…ë¥˜ë³„ ë‹¨ìœ„
 	int inputMoney;
 
-	// °¡»ó Çö±İ°áÁ¦ »óÈ²¸¸ ±¸Çö
+	// ê°€ìƒ í˜„ê¸ˆê²°ì œ ìƒí™©ë§Œ êµ¬í˜„
 	public Payment_panel(String name, String mobile, int seatNum, String useTime, int price) {
 		this.name = name;
 		this.mobile = mobile;
@@ -62,11 +62,11 @@ public class Payment_panel extends JPanel implements ActionListener {
 		this.useTime = useTime;
 		this.price = price;
 
-		setLayout(null); // ¹èÄ¡°ü¸®ÀÚ ¼³Á¤ x
+		setLayout(null); // ë°°ì¹˜ê´€ë¦¬ì ì„¤ì • x
 		info(name, mobile);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 28);
-		summary_LB = new JLabel(" °áÁ¦ ³»¿ª");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 28);
+		summary_LB = new JLabel(" ê²°ì œ ë‚´ì—­");
 		summary_LB.setFont(font);
 		summary_LB.setForeground(Color.WHITE);
 		summary_LB.setOpaque(true);
@@ -75,7 +75,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		summary_LB.setBounds(50, 200, 120, 50);
 		add(summary_LB);
 
-		payment_LB = new JLabel(" °áÁ¦ ¹æ¹ı");
+		payment_LB = new JLabel(" ê²°ì œ ë°©ë²•");
 		payment_LB.setFont(font);
 		payment_LB.setForeground(Color.WHITE);
 		payment_LB.setOpaque(true);
@@ -84,8 +84,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 		payment_LB.setBounds(50, 450, 120, 50);
 		add(payment_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
-		seatNum_LB = new JLabel("¡¤ ¼±ÅÃ ÁÂ¼® : " + seatNum + "¹ø");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
+		seatNum_LB = new JLabel("Â· ì„ íƒ ì¢Œì„ : " + seatNum + "ë²ˆ");
 		seatNum_LB.setFont(font);
 		seatNum_LB.setForeground(Color.BLACK);
 		seatNum_LB.setBackground(ColorInfo.instance.label_color);
@@ -94,7 +94,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		seatNum_LB.setBounds(60, 260, 260, 40);
 		add(seatNum_LB);
 
-		useTime_LB = new JLabel("¡¤ ÀÌ¿ë ½Ã°£ : " + useTime);
+		useTime_LB = new JLabel("Â· ì´ìš© ì‹œê°„ : " + useTime);
 		useTime_LB.setFont(font);
 		useTime_LB.setForeground(Color.BLACK);
 		useTime_LB.setBackground(ColorInfo.instance.label_color);
@@ -103,7 +103,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		useTime_LB.setBounds(60, 300, 360, 40);
 		add(useTime_LB);
 
-		totalPrice_LB = new JLabel("¡¤ °áÁ¦ÇÒ ±İ¾× : " + price + "¿ø");
+		totalPrice_LB = new JLabel("Â· ê²°ì œí•  ê¸ˆì•¡ : " + price + "ì›");
 		totalPrice_LB.setFont(font);
 		totalPrice_LB.setForeground(Color.BLACK);
 		totalPrice_LB.setBackground(ColorInfo.instance.label_color);
@@ -112,7 +112,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		totalPrice_LB.setBounds(60, 340, 260, 40);
 		add(totalPrice_LB);
 
-		startTime_LB = new JLabel("¡¤ »ç¿ë ½ÃÀÛ ½Ã°£ : " + format.format(System.currentTimeMillis()));
+		startTime_LB = new JLabel("Â· ì‚¬ìš© ì‹œì‘ ì‹œê°„ : " + format.format(System.currentTimeMillis()));
 		startTime_LB.setFont(font);
 		startTime_LB.setForeground(Color.BLACK);
 		startTime_LB.setBackground(ColorInfo.instance.label_color);
@@ -125,8 +125,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 	}
 
 	void paymentMethod() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
-		cashPayment_btn = new JButton("Çö±İ°áÁ¦");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
+		cashPayment_btn = new JButton("í˜„ê¸ˆê²°ì œ");
 		cashPayment_btn.setForeground(ColorInfo.instance.button_color);
 		cashPayment_btn.setBackground(ColorInfo.instance.label_color);
 		cashPayment_btn.setFont(font);
@@ -135,7 +135,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		cashPayment_btn.addActionListener(this);
 		add(cashPayment_btn);
 
-		cardPayment_btn = new JButton("Ä«µå°áÁ¦");
+		cardPayment_btn = new JButton("ì¹´ë“œê²°ì œ");
 		cardPayment_btn.setForeground(ColorInfo.instance.button_color);
 		cardPayment_btn.setBackground(ColorInfo.instance.label_color);
 		cardPayment_btn.setFont(font);
@@ -149,8 +149,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 	void cashPaymentSet() {
 		inputMoney = 0;
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
-		inputMoney_LB = new JLabel("¡¤ ÅõÀÔÇÑ ±İ¾×  : ");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 20);
+		inputMoney_LB = new JLabel("Â· íˆ¬ì…í•œ ê¸ˆì•¡  : ");
 		inputMoney_LB.setFont(font);
 		inputMoney_LB.setForeground(Color.BLACK);
 		inputMoney_LB.setBackground(ColorInfo.instance.label_color);
@@ -159,7 +159,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		inputMoney_LB.setBounds(60, 590, 130, 40);
 		add(inputMoney_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 18);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 18);
 		inputMoney_tf = new JTextField(inputMoney + "");
 		inputMoney_tf.setBounds(200, 590, 120, 40);
 		inputMoney_tf.setBackground(new Color(235, 255, 230));
@@ -169,8 +169,8 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 		moneyButtonSet();
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 24);
-		payment_btn = new JButton("°áÁ¦");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 24);
+		payment_btn = new JButton("ê²°ì œ");
 		payment_btn.setForeground(ColorInfo.instance.label_color);
 		payment_btn.setBackground(ColorInfo.instance.button_color);
 		payment_btn.setFont(font);
@@ -179,7 +179,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		payment_btn.addActionListener(this);
 		add(payment_btn);
 
-		cancel_btn = new JButton("Ãë¼Ò");
+		cancel_btn = new JButton("ì·¨ì†Œ");
 		cancel_btn.setForeground(Color.gray);
 		cancel_btn.setBackground(ColorInfo.instance.label_color);
 		cancel_btn.setFont(font);
@@ -190,14 +190,14 @@ public class Payment_panel extends JPanel implements ActionListener {
 	}
 
 	void moneyButtonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 22);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 22);
 		money_Btn = new JButton[4];
 		for (int i = 0; i < money_Btn.length; i++) {
 			money_Btn[i] = new JButton(arMoneyKind[i] + "");
 			money_Btn[i].setBackground(new Color(210, 210, 210));
 			money_Btn[i].setForeground(Color.WHITE);
 			money_Btn[i].setFont(font);
-			money_Btn[i].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
+			money_Btn[i].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 			money_Btn[i].setBounds(60 + i * 110, 670, 90, 60);
 			money_Btn[i].addActionListener(this);
 			add(money_Btn[i]);
@@ -238,7 +238,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 		int charge = inputMoney - price;
 
-		// ÁöºÒÇÑ ±İ¾× ÆÄ¾Ç
+		// ì§€ë¶ˆí•œ ê¸ˆì•¡ íŒŒì•…
 		if (charge < 0) {
 			return result;
 		} else {
@@ -248,23 +248,23 @@ public class Payment_panel extends JPanel implements ActionListener {
 	}
 
 	void info(String name, String mobile) {
-		// Á¤º¸ ·¹ÀÌºí
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 40);
+		// ì •ë³´ ë ˆì´ë¸”
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 40);
 		JLabel name_LB = new JLabel(name);
 		name_LB.setFont(font);
 		name_LB.setForeground(Color.white);
 		name_LB.setBounds(40, 60, 120, 40);
 		add(name_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 16);
 		JLabel mobile_LB = new JLabel("HP." + mobile);
 		mobile_LB.setFont(font);
 		mobile_LB.setForeground(Color.white);
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 22);
-		seat_btn = new JButton("ÁÂ¼®È­¸é");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 22);
+		seat_btn = new JButton("ì¢Œì„í™”ë©´");
 		seat_btn.setBackground(ColorInfo.instance.label_color);
 		seat_btn.setForeground(Color.black);
 		seat_btn.setFont(font);
@@ -272,7 +272,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		seat_btn.addActionListener(this);
 		add(seat_btn);
 
-		login_btn = new JButton("Ã³À½À¸·Î");
+		login_btn = new JButton("ì²˜ìŒìœ¼ë¡œ");
 		login_btn.setBackground(ColorInfo.instance.label_color);
 		login_btn.setForeground(Color.black);
 		login_btn.setFont(font);
@@ -294,19 +294,19 @@ public class Payment_panel extends JPanel implements ActionListener {
 			cashPaymentSet();
 			repaint();
 		} else if (e.getSource() == cardPayment_btn) {
-			JOptionPane.showMessageDialog(null, "ÁØºñ ÁßÀÔ´Ï´Ù.", "Message", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ì¤€ë¹„ ì¤‘ì…ë‹ˆë‹¤.", "Message", JOptionPane.INFORMATION_MESSAGE);
 		} else if (e.getSource() == cancel_btn) {
-			JOptionPane.showMessageDialog(null, "°áÁ¦°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù.", "Message", JOptionPane.PLAIN_MESSAGE );
+			JOptionPane.showMessageDialog(null, "ê²°ì œê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.PLAIN_MESSAGE);
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		} else if (e.getSource() == payment_btn) {
 			if (purchase()) {
-				JOptionPane.showMessageDialog(null, "°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "Message", JOptionPane.PLAIN_MESSAGE );
+				JOptionPane.showMessageDialog(null, "ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.PLAIN_MESSAGE);
 				if (!useTime.equals("")) {
 					String temp = "";
 					System.out.println(useTime);
 					for (int i = 0; i < useTime.length(); i++) {
-						if (useTime.charAt(i) == '½Ã') {
+						if (useTime.charAt(i) == 'ì‹œ') {
 							break;
 						}
 						temp += useTime.charAt(i);
@@ -316,7 +316,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 				}
 				FileManager.instance.checkIn(mobile, useTime, seatNum);
 			} else {
-				JOptionPane.showMessageDialog(null, "ÅõÀÔÇÑ ±İ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.", "Message", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "íˆ¬ì…í•œ ê¸ˆì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.", "Message", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 		}

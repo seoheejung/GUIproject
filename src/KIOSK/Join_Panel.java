@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.Normalizer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,10 +23,10 @@ import javax.swing.JTextField;
 
 public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
-	JTextField name_tf; // ÀÌ¸§ ÀÔ·ÂÃ¢
-	JTextField mobile_tf; // ÀüÈ­¹øÈ£ ÀÔ·ÂÃ¢
-	JTextField pw_tf; // ºñ¹Ğ¹øÈ£ ÀÔ·ÂÃ¢
-	JTextField confirm_pw_tf; // ºñ¹Ğ¹øÈ£ È®ÀÎ ÀÔ·ÂÃ¢
+	JTextField name_tf; // ì´ë¦„ ì…ë ¥ì°½
+	JTextField mobile_tf; // ì „í™”ë²ˆí˜¸ ì…ë ¥ì°½
+	JTextField pw_tf; // ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ì°½
+	JTextField confirm_pw_tf; // ë¹„ë°€ë²ˆí˜¸ í™•ì¸ ì…ë ¥ì°½
 
 	String name = "";
 	String mobile = "";
@@ -34,23 +35,23 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	int position = -1;
 
-	JCheckBox check = new JCheckBox("°³ÀÎÁ¤º¸Ãë±Ş¹æÄ§µ¿ÀÇ"); // °³ÀÎÁ¤º¸Ãë±Ş¹æÄ§µ¿ÀÇ Ã¼Å©¹Ú½º
+	JCheckBox check = new JCheckBox("ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨ë™ì˜"); // ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨ë™ì˜ ì²´í¬ë°•ìŠ¤
 	boolean isChecked = false;
 
 	Font font;
 
 	Image img = new ImageIcon("./src/Image/bg.jpg").getImage();
 
-	JButton join_btn; // È¸¿ø°¡ÀÔ ¹öÆ°
-	JButton back_btn; // µÚ·Î°¡±â ¹öÆ°
+	JButton join_btn; // íšŒì›ê°€ì… ë²„íŠ¼
+	JButton back_btn; // ë’¤ë¡œê°€ê¸° ë²„íŠ¼
 	KeyBoard_btn_Setting keyBoard;
 
 	public Join_Panel() {
 		setLayout(null);
 
-		// È¸¿ø°¡ÀÔ ·¹ÀÌºí
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 45);
-		JLabel join_LB = new JLabel("È¸¿ø °¡ÀÔ");
+		// íšŒì›ê°€ì… ë ˆì´ë¸”
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 45);
+		JLabel join_LB = new JLabel("íšŒì› ê°€ì…");
 		join_LB.setFont(font);
 		join_LB.setForeground(Color.WHITE);
 		join_LB.setBounds(180, 50, 270, 50);
@@ -91,29 +92,36 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		temp = keyBoard.keyBoardButtonPress(e);
 
 		if (position == 1) {
-			if (name.length() > 0 && temp.equals("¢·")) {
-				name = name.substring(0, name.length() - 1);
+			if (temp.equals("â—")) {
+				if (name.length() > 0)
+					name = name.substring(0, name.length() - 1);
 			} else {
 				name += temp;
 			}
 			name_tf.setText(name);
 		} else if (position == 2) {
-			if (mobile.length() > 0 && temp.equals("¢·")) {
-				mobile = mobile.substring(0, mobile.length() - 1);
+			if (temp.equals("â—")) {
+				if (mobile.length() > 0)
+					mobile = mobile.substring(0, mobile.length() - 1);
 			} else {
 				mobile += temp;
+				if (mobile.length() > 10) {
+					position = 3;
+				}
 			}
 			mobile_tf.setText(mobile);
 		} else if (position == 3) {
-			if (pw.length() > 0 && temp.equals("¢·")) {
-				pw = pw.substring(0, pw.length() - 1);
+			if (temp.equals("â—")) {
+				if (pw.length() > 0)
+					pw = pw.substring(0, pw.length() - 1);
 			} else {
 				pw += temp;
 			}
 			pw_tf.setText(pw);
 		} else if (position == 4) {
-			if (confirm_pw.length() > 0 && temp.equals("¢·")) {
-				confirm_pw = confirm_pw.substring(0, confirm_pw.length() - 1);
+			if (temp.equals("â—")) {
+				if (confirm_pw.length() > 0)
+					confirm_pw = confirm_pw.substring(0, confirm_pw.length() - 1);
 			} else {
 				confirm_pw += temp;
 			}
@@ -124,9 +132,9 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	}
 
 	void buttonSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 16);
 
-		join_btn = new JButton("È¸¿ø°¡ÀÔ");
+		join_btn = new JButton("íšŒì›ê°€ì…");
 		join_btn.setBackground(ColorInfo.instance.button_color);
 		join_btn.setForeground(Color.WHITE);
 		join_btn.setFont(font);
@@ -134,7 +142,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		join_btn.addActionListener(this);
 		add(join_btn);
 
-		back_btn = new JButton("Ãë¼Ò");
+		back_btn = new JButton("ì·¨ì†Œ");
 		back_btn.setBackground(ColorInfo.instance.button_color);
 		back_btn.setForeground(Color.WHITE);
 		back_btn.setFont(font);
@@ -144,10 +152,10 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	}
 
 	void textFieldSet() {
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.PLAIN, 16);
 
 		name_tf = new JTextField(15);
-		name_tf.setText("ÀÌ¸§");
+		name_tf.setText("ì´ë¦„");
 		name_tf.setBounds(135, 150, 270, 40);
 		name_tf.setBackground(ColorInfo.instance.textField_color);
 		name_tf.setForeground(Color.WHITE);
@@ -182,7 +190,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		});
 
 		mobile_tf = new JTextField(15);
-		mobile_tf.setText("ÈŞ´ëÆù¹øÈ£");
+		mobile_tf.setText("íœ´ëŒ€í°ë²ˆí˜¸");
 		mobile_tf.setBounds(135, 210, 270, 40);
 		mobile_tf.setBackground(ColorInfo.instance.textField_color);
 		mobile_tf.setForeground(Color.WHITE);
@@ -217,7 +225,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		});
 
 		pw_tf = new JTextField(5);
-		pw_tf.setText("ºñ¹Ğ¹øÈ£");
+		pw_tf.setText("ë¹„ë°€ë²ˆí˜¸");
 		pw_tf.setBounds(135, 270, 270, 40);
 		pw_tf.setBackground(ColorInfo.instance.textField_color);
 		pw_tf.setForeground(Color.WHITE);
@@ -252,7 +260,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 		});
 
 		confirm_pw_tf = new JTextField(5);
-		confirm_pw_tf.setText("ºñ¹Ğ¹øÈ£È®ÀÎ");
+		confirm_pw_tf.setText("ë¹„ë°€ë²ˆí˜¸í™•ì¸");
 		confirm_pw_tf.setBounds(135, 330, 270, 40);
 		confirm_pw_tf.setBackground(ColorInfo.instance.textField_color);
 		confirm_pw_tf.setForeground(Color.WHITE);
@@ -304,28 +312,28 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 	public void actionPerformed(ActionEvent e) {
 		keyBoardButtonPress(e);
 
-		// Ãë¼Ò ¹öÆ° ´­·¶À» ¶§ ·Î±×ÀÎÃ¢À¸·Î ÀÌµ¿
+		// ì·¨ì†Œ ë²„íŠ¼ ëˆŒë €ì„ ë•Œ ë¡œê·¸ì¸ì°½ìœ¼ë¡œ ì´ë™
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 
 		} else if (e.getSource() == join_btn) {
-			// È¸¿ø°¡ÀÔ ¹öÆ° ´­·¶À» ¶§
+			// íšŒì›ê°€ì… ë²„íŠ¼ ëˆŒë €ì„ ë•Œ
 			if (name_tf.getText().equals("") || mobile_tf.getText().equals("") || pw_tf.getText().equals("")
 					|| confirm_pw_tf.getText().equals("")) {
-				JOptionPane.showMessageDialog(null, "¸ğµç ÇÊµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.", "", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ëª¨ë“  í•„ë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.", "", JOptionPane.WARNING_MESSAGE);
 				return;
 			} else if (!(pw_tf.getText().equals(confirm_pw_tf.getText()))) {
-				JOptionPane.showMessageDialog(null, "ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.", "", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.", "", JOptionPane.WARNING_MESSAGE);
 				return;
 			} else if (!isChecked) {
-				JOptionPane.showMessageDialog(null, "°³ÀÎÁ¤º¸Ãë±Ş¹æÄ§µ¿ÀÇ¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.", "", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨ë™ì˜ë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.", "", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 
 			for (int i = 0; i < FileManager.instance.userManager.size(); i++) {
 				if (mobile_tf.getText().equals(FileManager.instance.userManager.get(i).getMobile())) {
-					JOptionPane.showMessageDialog(null, "µ¿ÀÏÇÑ ¹øÈ£°¡ ÀÖ½À´Ï´Ù.", "Message", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ë™ì¼í•œ ë²ˆí˜¸ê°€ ìˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
@@ -340,7 +348,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			user.setPreTime(0);
 
 			FileManager.instance.addUser(user);
-			JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "Message", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.", "Message", JOptionPane.PLAIN_MESSAGE);
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		}
@@ -349,12 +357,12 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		// ¾ÆÀÌÅÛÀÇ »óÅÂ º¯È­ÀÇ Á¾·ù¸¦ »ó¼ö·Î ¹İÈ¯
+		// ì•„ì´í…œì˜ ìƒíƒœ ë³€í™”ì˜ ì¢…ë¥˜ë¥¼ ìƒìˆ˜ë¡œ ë°˜í™˜
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			// »ç¿ëÀÚ°¡ ¾ÆÀÌÅÛÀ» ¼±ÅÃÇÏ¸é ItemEvent.SELECTED °ªÀÎ 1 ¹İÈ¯
+			// ì‚¬ìš©ìê°€ ì•„ì´í…œì„ ì„ íƒí•˜ë©´ ItemEvent.SELECTED ê°’ì¸ 1 ë°˜í™˜
 			isChecked = true;
 		} else if (e.getStateChange() == ItemEvent.DESELECTED) {
-			// ´Ù½Ã ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ItemEvent.DESELECTED °ªÀÎ 2 ¹İÈ¯
+			// ë‹¤ì‹œ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ItemEvent.DESELECTED ê°’ì¸ 2 ë°˜í™˜
 			isChecked = false;
 		}
 

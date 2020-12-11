@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class Seat_Panel extends JPanel implements ActionListener {
 	Font font;
@@ -22,19 +21,19 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 	Image img = new ImageIcon("./src/Image/seat.jpg").getImage();
 
-	JButton back_btn; // ·Î±×ÀÎÈ­¸é ¹öÆ°
-	JButton update_btn; // Á¤º¸¼öÁ¤ ¹öÆ°
-	JButton[][] seat_btn; // ÁÂ¼® ¹öÆ°
+	JButton back_btn; // ë¡œê·¸ì¸í™”ë©´ ë²„íŠ¼
+	JButton update_btn; // ì •ë³´ìˆ˜ì • ë²„íŠ¼
+	JButton[][] seat_btn; // ì¢Œì„ ë²„íŠ¼
 
 	public Seat_Panel(String name, String mobile) {
 		this.name = name;
 		this.moblie = mobile;
 
-		setLayout(null); // ¹èÄ¡°ü¸®ÀÚ ¼³Á¤ x
+		setLayout(null); // ë°°ì¹˜ê´€ë¦¬ì ì„¤ì • x
 		info(name, mobile);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 22);
-		JLabel seat_LB = new JLabel("ÁÂ¼® ÀÌ¿ë ÇöÈ² : " + seatUseState());
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 22);
+		JLabel seat_LB = new JLabel("ì¢Œì„ ì´ìš© í˜„í™© : " + seatUseState());
 		seat_LB.setFont(font);
 		seat_LB.setForeground(Color.black);
 		seat_LB.setBounds(50, 200, 240, 50);
@@ -42,16 +41,16 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 		seatButtonSet();
 	}
-	
+
 	String seatUseState() {
 		String state = "";
 		int check = 0;
 		for (int i = 0; i < FileManager.instance.seatManager.size(); i++) {
-			if(!FileManager.instance.seatManager.get(i).isSeatUse()) {
-				check +=1;
+			if (!FileManager.instance.seatManager.get(i).isSeatUse()) {
+				check += 1;
 			}
 		}
-		
+
 		state = check + "/" + FileManager.instance.seatManager.size();
 		return state;
 	}
@@ -59,13 +58,13 @@ public class Seat_Panel extends JPanel implements ActionListener {
 	void seatButtonSet() {
 		seat_btn = new JButton[4][7];
 		int num = 1;
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 17);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 17);
 		for (int i = 0; i < seat_btn.length; i++) {
 			for (int n = 0; n < seat_btn[i].length; n++) {
 				seat_btn[i][n] = new JButton();
 				seat_btn[i][n].setText(num + "");
 				seat_btn[i][n].setFont(font);
-				seat_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0 , 0 , 0 , 0));
+				seat_btn[i][n].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				seat_btn[i][n].setBackground(Color.lightGray);
 				if (FileManager.instance.seatManager.get(num - 1).isSeatUse()) {
 					seat_btn[i][n].setBackground(Color.black);
@@ -85,23 +84,23 @@ public class Seat_Panel extends JPanel implements ActionListener {
 	}
 
 	void info(String name, String mobile) {
-		// Á¤º¸ ·¹ÀÌºí
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 40);
+		// ì •ë³´ ë ˆì´ë¸”
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 40);
 		JLabel name_LB = new JLabel(name);
 		name_LB.setFont(font);
 		name_LB.setForeground(Color.white);
 		name_LB.setBounds(40, 60, 120, 40);
 		add(name_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 16);
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 16);
 		JLabel mobile_LB = new JLabel("HP." + mobile);
 		mobile_LB.setFont(font);
 		mobile_LB.setForeground(Color.white);
 		mobile_LB.setBounds(40, 110, 200, 30);
 		add(mobile_LB);
 
-		font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 22);
-		update_btn = new JButton("Á¤º¸¼öÁ¤");
+		font = new Font("ë‚˜ëˆ”ìŠ¤í€˜ì–´", Font.BOLD, 22);
+		update_btn = new JButton("ì •ë³´ìˆ˜ì •");
 		update_btn.setBackground(ColorInfo.instance.label_color);
 		update_btn.setForeground(Color.black);
 		update_btn.setFont(font);
@@ -109,7 +108,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		update_btn.addActionListener(this);
 		add(update_btn);
 
-		back_btn = new JButton("µÚ·Î°¡±â");
+		back_btn = new JButton("ë’¤ë¡œê°€ê¸°");
 		back_btn.setBackground(ColorInfo.instance.label_color);
 		back_btn.setForeground(Color.black);
 		back_btn.setFont(font);
@@ -124,15 +123,18 @@ public class Seat_Panel extends JPanel implements ActionListener {
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
+		} else if (e.getSource() == update_btn) {
+			UpdateInfo_Dialog dialog = new UpdateInfo_Dialog(moblie);
 		} else {
 			for (int i = 0; i < seat_btn.length; i++) {
 				for (int n = 0; n < seat_btn[i].length; n++) {
 					if (e.getSource() == seat_btn[i][n]) {
 						int temp = Integer.parseInt(seat_btn[i][n].getText());
 						if (FileManager.instance.seatManager.get(temp - 1).isSeatUse()) {
-							JOptionPane.showMessageDialog(null, "»ç¿ë ÁßÀÎ ÁÂ¼®ÀÔ´Ï´Ù.", "Message", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "ì‚¬ìš© ì¤‘ì¸ ì¢Œì„ì…ë‹ˆë‹¤.", "Message",
+									JOptionPane.INFORMATION_MESSAGE);
 						} else {
-							MainSystem.frame.setContentPane(new Select_Panel(name, moblie, temp-1));
+							MainSystem.frame.setContentPane(new Select_Panel(name, moblie, temp - 1));
 							MainSystem.frame.revalidate();
 						}
 					}
