@@ -229,12 +229,17 @@ public class Login_Panel extends JPanel implements ActionListener {
 
 		// 로그인 버튼을 눌렀을 때
 		if (e.getSource() == login_btn) {
-			String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
-			if (log.equals("")) {
-				JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "Message", JOptionPane.WARNING_MESSAGE);
-			} else {
-				MainSystem.frame.setContentPane(new Seat_Panel(log, mobile_tf.getText()));
+			if (mobile_tf.getText().equals("01000000000") && pw_tf.getText().equals("0000")) {
+				MainSystem.frame.setContentPane(new Admin_Panel()); // 관리자모드로 이동
 				MainSystem.frame.revalidate();
+			} else {
+				String log = FileManager.instance.login(mobile_tf.getText(), pw_tf.getText());
+				if (log.equals("")) {
+					JOptionPane.showMessageDialog(null, "존재하지 않는 번호입니다.", "Message", JOptionPane.WARNING_MESSAGE);
+				} else {
+					MainSystem.frame.setContentPane(new Seat_Panel(log, mobile_tf.getText()));
+					MainSystem.frame.revalidate();
+				}
 			}
 			// 회원가입 버튼을 눌렀을 때
 		} else if (e.getSource() == join_btn) {
