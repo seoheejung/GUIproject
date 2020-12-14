@@ -1,15 +1,13 @@
 package KIOSK;
 
-import java.util.Calendar;
-
 // 회원 클래스
 public class UserInfo {
 	private String name;
 	private String mobile;
 	private String pw;
 	private int seatNum; // 자리 번호
-	private long maxTime; // 사용 가능한 총 시간
-	private long preTime; // 사용 시작한 시간
+	private int maxTime; // 사용 가능한 총 시간
+	private String preTime; // 사용 시작한 시간
 	boolean seatUse = false; // 자리를 사용하는지 여부
 
 	public String getName() {
@@ -44,28 +42,20 @@ public class UserInfo {
 		this.seatNum = seatNum;
 	}
 
-	public long getMaxTime() {
+	public int getMaxTime() {
 		return maxTime;
 	}
 
-	public void setMaxTime(long maxTime) {
-
+	public void setMaxTime(int maxTime) {
 		this.maxTime = maxTime;
 	}
 
-	public long getPreTime() {
+	public String getPreTime() {
 		return preTime;
 	}
 
-	public void setPreTime(long preTime) {
-		int hour = FileManager.instance.cal.get(Calendar.HOUR_OF_DAY);
-
-		if (preTime == 0) {
-			this.preTime = preTime;
-		} else {
-			this.preTime = hour;
-		}
-
+	public void setPreTime(String preTime) {
+		this.preTime = preTime;
 	}
 
 }

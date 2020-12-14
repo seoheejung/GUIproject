@@ -162,22 +162,14 @@ public class Login_Panel extends JPanel implements ActionListener {
 			public void mousePressed(MouseEvent e) {
 				position = 1;
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		pw_tf = new JTextField(5);
@@ -197,22 +189,14 @@ public class Login_Panel extends JPanel implements ActionListener {
 				position = 2;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 	}
 

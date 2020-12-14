@@ -22,9 +22,6 @@ public class Payment_panel extends JPanel implements ActionListener {
 
 	Font font;
 
-	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
-	// String format_time = format.format (System.currentTimeMillis());
-
 	String name;
 	String mobile;
 	int seatNum;
@@ -62,7 +59,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		this.useTime = useTime;
 		this.price = price;
 
-		setLayout(null); // 배치관리자 설정 x
+		setLayout(null);
 		info(name, mobile);
 
 		font = new Font("나눔스퀘어", Font.PLAIN, 28);
@@ -112,7 +109,7 @@ public class Payment_panel extends JPanel implements ActionListener {
 		totalPrice_LB.setBounds(60, 340, 260, 40);
 		add(totalPrice_LB);
 
-		startTime_LB = new JLabel("· 사용 시작 시간 : " + format.format(System.currentTimeMillis()));
+		startTime_LB = new JLabel("· 사용 시작 시간 : " + FileManager.instance.format.format(System.currentTimeMillis()));
 		startTime_LB.setFont(font);
 		startTime_LB.setForeground(Color.BLACK);
 		startTime_LB.setBackground(ColorInfo.instance.dial_button_color);
@@ -212,22 +209,14 @@ public class Payment_panel extends JPanel implements ActionListener {
 					inputMoney_tf.setText(inputMoney + "");
 					repaint();
 				}
-
 				@Override
-				public void mouseReleased(MouseEvent e) {
-				}
-
+				public void mouseReleased(MouseEvent e) {}
 				@Override
-				public void mouseExited(MouseEvent e) {
-				}
-
+				public void mouseExited(MouseEvent e) {}
 				@Override
-				public void mouseEntered(MouseEvent e) {
-				}
-
+				public void mouseEntered(MouseEvent e) {}
 				@Override
-				public void mouseClicked(MouseEvent e) {
-				}
+				public void mouseClicked(MouseEvent e) {}
 			});
 
 		}
@@ -304,14 +293,14 @@ public class Payment_panel extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
 				if (!useTime.equals("")) {
 					String temp = "";
-					System.out.println(useTime);
+					//System.out.println(useTime);
 					for (int i = 0; i < useTime.length(); i++) {
 						if (useTime.charAt(i) == '시') {
 							break;
 						}
 						temp += useTime.charAt(i);
 					}
-					System.out.println(temp);
+					//System.out.println(temp);
 					useTime = temp.substring(1, temp.length());
 				}
 				FileManager.instance.checkIn(mobile, useTime, seatNum);

@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -28,7 +31,8 @@ public class FileManager {
 
 	ArrayList<UserInfo> userManager = null;
 	ArrayList<SeatInfo> seatManager = null;
-	
+
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 
 	// 싱글톤 패턴
@@ -81,15 +85,26 @@ public class FileManager {
 					if (seatManager.get(j).getSeatNum() == userManager.get(i).getSeatNum()) {
 						seatManager.get(j).setSeatUse(false);
 						saveSeatData();
+						break;
 					}
 				}
 				userManager.get(i).setSeatNum(0);
 				userManager.get(i).seatUse = false;
 				if (userManager.get(i).getMaxTime() > 0) {
-					
-					long time = (long) cal.get(Calendar.HOUR_OF_DAY);
-					userManager.get(i).setMaxTime(userManager.get(i).getMaxTime() - time);
-					userManager.get(i).setPreTime(0);
+					Date pre = null;
+					Date now = new Date();
+					try {
+						pre = FileManager.instance.format.parse(userManager.get(i).getPreTime());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+
+					long diffHour = (now.getTime() - pre.getTime()) / (60 * 60 * 1000);
+					if (diffHour > 0) {
+						userManager.get(i).setMaxTime(userManager.get(i).getMaxTime() - (int) diffHour);
+					}
+					userManager.get(i).setMaxTime(0);
+					userManager.get(i).setPreTime("0");
 				}
 				updateUser(i, userManager.get(i));
 				return true;
@@ -100,17 +115,22 @@ public class FileManager {
 
 	// 입실하기
 	void checkIn(String mobile, String useTime, int seatNum) {
+		LOG = -1;
 		for (int i = 0; i < userManager.size(); i++) {
 			if (mobile.equals(userManager.get(i).getMobile())) {
 				userManager.get(i).setSeatNum(seatNum);
-				userManager.get(i).setMaxTime(Long.parseLong(useTime));
-				userManager.get(i).setPreTime(1);
+				userManager.get(i).setMaxTime(Integer.parseInt(useTime));
+				userManager.get(i).setPreTime(format.format(System.currentTimeMillis()));
 				userManager.get(i).seatUse = true;
 				updateUser(i, userManager.get(i));
-			} else {
-				JOptionPane.showMessageDialog(null, "비정상적인 접근입니다.", "Message", JOptionPane.WARNING_MESSAGE);
-				System.exit(0);
+				LOG = i;
+				break;
 			}
+		}
+
+		if (LOG == -1) {
+			JOptionPane.showMessageDialog(null, "비정상적인 접근입니다.", "Message", JOptionPane.WARNING_MESSAGE);
+			System.exit(0);
 		}
 
 		for (int i = 0; i < seatManager.size(); i++) {
@@ -119,7 +139,7 @@ public class FileManager {
 				saveSeatData();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "영수증이 출력되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE );
+		JOptionPane.showMessageDialog(null, "영수증이 출력되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
 		MainSystem.frame.setContentPane(new Login_Panel());
 		MainSystem.frame.revalidate();
 	}
@@ -171,7 +191,7 @@ public class FileManager {
 		temp.setPw(userinfo[2]);
 		temp.setSeatNum(Integer.parseInt(userinfo[3]));
 		temp.setMaxTime(Integer.parseInt(userinfo[4]));
-		temp.setPreTime(0);
+		temp.setPreTime(userinfo[5]);
 		temp.seatUse = Boolean.valueOf(userinfo[6]);
 		userManager.add(temp);
 	}

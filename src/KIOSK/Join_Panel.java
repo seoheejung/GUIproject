@@ -48,7 +48,7 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 
 	public Join_Panel() {
 		setLayout(null);
-		
+
 		font = new Font("나눔스퀘어", Font.PLAIN, 25);
 
 		JLabel join_LB = new JLabel("회원 가입");
@@ -130,7 +130,6 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			}
 			confirm_pw_tf.setText(confirm_pw);
 		}
-
 		repaint();
 	}
 
@@ -174,22 +173,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 				position = 1;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		mobile_tf = new JTextField(15);
@@ -209,22 +200,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 				position = 2;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		pw_tf = new JTextField(5);
@@ -244,22 +227,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 				position = 3;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		confirm_pw_tf = new JTextField(5);
@@ -279,22 +254,14 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 				position = 4;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		check.setBounds(135, 440, 200, 30);
@@ -339,7 +306,6 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 					JOptionPane.showMessageDialog(null, "동일한 번호가 있습니다.", "Message", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-
 			}
 
 			UserInfo user = new UserInfo();
@@ -348,14 +314,13 @@ public class Join_Panel extends JPanel implements ActionListener, ItemListener {
 			user.setPw(pw_tf.getText());
 			user.setSeatNum(0);
 			user.setMaxTime(0);
-			user.setPreTime(0);
+			user.setPreTime("0");
 
 			FileManager.instance.addUser(user);
 			JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
 		}
-
 	}
 
 	@Override

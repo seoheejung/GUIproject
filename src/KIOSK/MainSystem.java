@@ -26,8 +26,9 @@ public class MainSystem {
 		FileManager.instance.loadData();
 		FileManager.instance.loadSeatData();
 
-		// frame.setContentPane(new Login_Panel());
-		 frame.setContentPane(new Admin_UserInfo_Panel());
+		 frame.setContentPane(new Login_Panel());
+		// frame.setContentPane(new Admin_UserInfo_Panel());
+		// frame.setContentPane(new Admin_SeatInfo_Panel());
 		// frame.setContentPane(new Join_Panel());
 		// frame.setContentPane(new Seat_Panel("서희정", "01099374928"));
 		// frame.setContentPane(new Select_Panel("서희정", "01099374928", 25));

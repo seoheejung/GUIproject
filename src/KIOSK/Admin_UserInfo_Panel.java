@@ -13,15 +13,17 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-class UserBoardSet extends JPanel implements ActionListener {
+class UserInfo_Board extends JPanel implements ActionListener {
 	Font font;
 	Admin_UserInfo_Panel user_list_board = null;
+	UserInfo user;
+	int num = 0;
 
 	JLabel num_LB;
-	int num = 0;
 	JLabel name_LB;
 	JLabel mobile_LB;
 	JLabel seatNum_LB;
@@ -29,15 +31,15 @@ class UserBoardSet extends JPanel implements ActionListener {
 
 	JButton checkOut_btn;
 
-	public UserBoardSet(int index, UserInfo user, Admin_UserInfo_Panel panel) {
-
+	public UserInfo_Board(int index, UserInfo user, Admin_UserInfo_Panel panel) {
+		this.user = user;
 		user_list_board = panel;
 
 		setLayout(null);
 
 		int pos = index % panel.page_user_max;
 		setBounds(100, 210 + pos * 100, 350, 80);
-
+		setBackground(ColorInfo.instance.bg_color);
 		num = index;
 
 		font = new Font("나눔스퀘어", Font.PLAIN, 14);
@@ -50,7 +52,7 @@ class UserBoardSet extends JPanel implements ActionListener {
 
 		name_LB = new JLabel();
 		name_LB.setBounds(30, 10, 80, 30);
-		name_LB.setBackground(new Color(255, 255, 153));
+		name_LB.setBackground(ColorInfo.instance.bg_color);
 		name_LB.setFont(font);
 		name_LB.setText(user.getName());
 		name_LB.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -58,31 +60,31 @@ class UserBoardSet extends JPanel implements ActionListener {
 
 		mobile_LB = new JLabel();
 		mobile_LB.setBounds(30, 40, 120, 30);
-		mobile_LB.setBackground(new Color(255, 255, 153));
+		mobile_LB.setBackground(ColorInfo.instance.bg_color);
 		mobile_LB.setFont(font);
 		mobile_LB.setText(user.getMobile());
 		mobile_LB.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		add(mobile_LB);
-		
+
 		seatNum_LB = new JLabel();
 		seatNum_LB.setBounds(130, 10, 80, 30);
-		seatNum_LB.setBackground(new Color(255, 255, 153));
+		seatNum_LB.setBackground(ColorInfo.instance.bg_color);
 		seatNum_LB.setFont(font);
-		if(user.getSeatNum() != 0) {
+		if (user.getSeatNum() != 0) {
 			seatNum_LB.setText("자리 : " + user.getSeatNum() + "번");
-		}else {
+		} else {
 			seatNum_LB.setText("자리 : X");
 		}
 		seatNum_LB.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		add(seatNum_LB);
-		
+
 		maxTime_LB = new JLabel();
 		maxTime_LB.setBounds(130, 40, 120, 30);
-		maxTime_LB.setBackground(new Color(255, 255, 153));
+		maxTime_LB.setBackground(ColorInfo.instance.bg_color);
 		maxTime_LB.setFont(font);
-		if(user.getMaxTime() != 0) {
+		if (user.getMaxTime() != 0) {
 			maxTime_LB.setText("남은시간 : " + user.getMaxTime() + "시간");
-		}else {
+		} else {
 			maxTime_LB.setText("남은시간 : X");
 		}
 		maxTime_LB.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -100,10 +102,18 @@ class UserBoardSet extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getSource() == checkOut_btn && user.getSeatNum() != 0) {
+			int result = JOptionPane.showConfirmDialog(null, user.getName() + "님을 강제퇴실 합니까?", "Message",
+					JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				if (FileManager.instance.checkOut(user.getMobile())) {
+					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+					MainSystem.frame.setContentPane(new Admin_UserInfo_Panel());
+					MainSystem.frame.revalidate();
+				}
+			}
+		}
 	}
-
 }
 
 public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
@@ -111,7 +121,7 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 	Image img = new ImageIcon("./src/Image/bg.jpg").getImage();
 
 	public ArrayList<UserInfo> user_list = FileManager.instance.userManager;
-	public ArrayList<UserBoardSet> user_board_list = new ArrayList<>();
+	public ArrayList<UserInfo_Board> user_board_list = new ArrayList<>();
 
 	private int page_num = 1;// 현재 페이지 번호
 	public int page_user_max = 5; // 한 페이지에 보여줄 회원 수
@@ -119,6 +129,7 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 	int page_min = 0; // 현재 페이지의 시작 페이징 번호
 	int page_max = 0; // 현재 페이지의 마지막 페이징 번호
 
+	JButton back_btn;
 	JButton page_btns[] = new JButton[page_btn_max]; // 페이지 버튼
 	JButton left_btn;
 	JButton right_btn;
@@ -138,8 +149,20 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 		admin_userInfo_LB.setBounds(170, 120, 200, 50);
 		add(admin_userInfo_LB);
 
-		buttonSet();
 		userListSet();
+		buttonSet();
+
+		font = new Font("나눔스퀘어", Font.PLAIN, 17);
+
+		back_btn = new JButton("돌아가기");
+		back_btn.setBackground(ColorInfo.instance.disabled_button_color);
+		back_btn.setForeground(Color.WHITE);
+		back_btn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		back_btn.setFont(font);
+		back_btn.setBounds(410, 900, 100, 30);
+		back_btn.addActionListener(this);
+		add(back_btn);
+
 	}
 
 	void buttonSet() {
@@ -151,7 +174,7 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 			}
 		}
 
-		font = new Font("나눔스퀘어", Font.PLAIN, 16);
+		font = new Font("나눔스퀘어", Font.PLAIN, 14);
 
 		page_min = page_num;
 		page_max = page_btn_max;
@@ -184,13 +207,15 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 		right_btn.setText("▷");
 		add(right_btn);
 		right_btn.addActionListener(this);
+
+		repaint();
 	}
 
 	public void userListSet() {
 		Component[] componentList = this.getComponents();
 
 		for (Component c : componentList) {
-			if (c instanceof Admin_UserInfo_Panel) {
+			if (c instanceof UserInfo_Board) {
 				this.remove(c);
 			}
 		}
@@ -207,18 +232,62 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 
 		user_board_list = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-
-			UserBoardSet userBoard = new UserBoardSet(i + start_index, user_list.get(start_index + i), this);
-			add(userBoard);
+			UserInfo_Board userBoard = new UserInfo_Board(i + start_index, user_list.get(start_index + i), this);
+			add(userBoard); // 컨포넌트에 추가
 			user_board_list.add(userBoard);
-
 		}
+
 		repaint();
+	}
+
+	void num_btn_click(int i) {
+		int num = Integer.parseInt(page_btns[i].getText());
+		page_num = num;
+		userListSet();
+	}
+
+	void right_btn_click() {
+		// 최대 페이지 번호와 최소 페이지 번호는 +최대 페이지 수로 설정
+		page_max += page_btn_max;
+		page_min += page_btn_max;
+		// 페이지 번호는 최소 페이지 번호
+		page_num = page_min;
+		// 페이지 번호를 현재 번호 +최대 페이지 수로 설정
+		for (int i = 0; i < page_btn_max; i++) {
+			int num = Integer.parseInt(page_btns[i].getText());
+			page_btns[i].setText((num + page_btn_max) + "");
+		}
+		userListSet();
+	}
+
+	void left_btn_click() {
+		if (page_num == 1) {
+			return;
+		}
+		// 최대 페이지 번호와 최소 페이지 번호는 -최대 페이지 수로 설정
+		page_max -= page_btn_max;
+		page_min -= page_btn_max;
+		// 페이지 번호는 최대 페이지 번호
+		page_num = page_max;
+		// 페이지 번호를 현재 번호 -최대 페이지 수로 설정
+		for (int i = 0; i < page_btn_max; i++) {
+			int num = Integer.parseInt(page_btns[i].getText());
+			page_btns[i].setText((num - page_btn_max) + "");
+		}
+		// 최소 페이지 번호가 1보다 작으면 1~5로 설정
+		if (page_min < 0) {
+			page_min = 1;
+			page_max = 5;
+			page_num = 1;
+			for (int i = 0; i < page_btn_max; i++) {
+				page_btns[i].setText(i + "");
+			}
+		}
+		userListSet();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-
 		g.drawImage(img, 0, 0, 540, 960, null);
 		setOpaque(false);
 		super.paintComponent(g);
@@ -226,7 +295,20 @@ public class Admin_UserInfo_Panel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == left_btn) {
+			left_btn_click();
+		} else if (e.getSource() == right_btn) {
+			right_btn_click();
+		} else if (e.getSource() == back_btn) {
+			MainSystem.frame.setContentPane(new Admin_Panel());
+			MainSystem.frame.revalidate();
+		}
 
+		for (int i = 0; i < page_btn_max; i++) {
+			if (e.getSource() == page_btns[i]) {
+				num_btn_click(i);
+				break;
+			}
+		}
 	}
 }
