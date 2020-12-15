@@ -103,11 +103,11 @@ class UserInfo_Board extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == checkOut_btn && user.getSeatNum() != 0) {
-			int result = JOptionPane.showConfirmDialog(null, user.getName() + "님을 강제퇴실 합니까?", "Message",
+			int result = JOptionPane.showConfirmDialog(null, user.getName() + "님을 강제퇴실 하시겠습니까?", "Message",
 					JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 				if (FileManager.instance.checkOut(user.getMobile())) {
-					JOptionPane.showMessageDialog(null, "퇴실이 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "강제퇴실이 완료되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 					MainSystem.frame.setContentPane(new Admin_UserInfo_Panel());
 					MainSystem.frame.revalidate();
 				}

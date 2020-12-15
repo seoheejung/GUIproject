@@ -226,7 +226,6 @@ public class Payment_panel extends JPanel implements ActionListener {
 		boolean result = false;
 
 		int charge = inputMoney - price;
-
 		// 지불한 금액 파악
 		if (charge < 0) {
 			return result;
@@ -293,14 +292,12 @@ public class Payment_panel extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
 				if (!useTime.equals("")) {
 					String temp = "";
-					//System.out.println(useTime);
 					for (int i = 0; i < useTime.length(); i++) {
 						if (useTime.charAt(i) == '시') {
 							break;
 						}
 						temp += useTime.charAt(i);
 					}
-					//System.out.println(temp);
 					useTime = temp.substring(1, temp.length());
 				}
 				FileManager.instance.checkIn(mobile, useTime, seatNum);
@@ -309,7 +306,6 @@ public class Payment_panel extends JPanel implements ActionListener {
 				return;
 			}
 		}
-
 	}
 
 	@Override

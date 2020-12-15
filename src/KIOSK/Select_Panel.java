@@ -22,7 +22,7 @@ public class Select_Panel extends JPanel implements ActionListener {
 	int seatNum;
 	String useTime = "";
 	int price = 0;
-
+	
 	Image img = new ImageIcon("./src/Image/purchase.jpg").getImage();
 
 	JButton login_btn; // 처음으로 버튼

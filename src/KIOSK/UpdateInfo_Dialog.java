@@ -103,22 +103,14 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 				position = 1;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 		confirm_pw_tf = new JTextField(5);
@@ -138,22 +130,14 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 				position = 2;
 				repaint();
 			}
-
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 
 	}
@@ -240,8 +224,6 @@ public class UpdateInfo_Dialog extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(null, "비밀번호가 변경되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
 			}
-				
-
 		} else if (e.getSource() == cancel_btn) {
 			dispose();
 		}

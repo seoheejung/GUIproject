@@ -119,7 +119,6 @@ public class Seat_Panel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == back_btn) {
 			MainSystem.frame.setContentPane(new Login_Panel());
 			MainSystem.frame.revalidate();
@@ -131,8 +130,7 @@ public class Seat_Panel extends JPanel implements ActionListener {
 					if (e.getSource() == seat_btn[i][n]) {
 						int temp = Integer.parseInt(seat_btn[i][n].getText());
 						if (FileManager.instance.seatManager.get(temp - 1).isSeatUse()) {
-							JOptionPane.showMessageDialog(null, "사용 중인 좌석입니다.", "Message",
-									JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "사용 중인 좌석입니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							MainSystem.frame.setContentPane(new Select_Panel(name, moblie, temp - 1));
 							MainSystem.frame.revalidate();
@@ -141,7 +139,6 @@ public class Seat_Panel extends JPanel implements ActionListener {
 				}
 			}
 		}
-
 	}
 
 	@Override
